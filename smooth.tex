@@ -1,0 +1,2083 @@
+\documentclass[10pt,oneside, openany]{book}
+% \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+% \usepackage[dvips,paperheight=11cm, paperwidth=21cm, ,hmargin={9.5cm,0.5cm},vmargin={0.5cm,0.5cm}]{geometry}
+\usepackage[a4paper, hmargin={4cm,4cm},vmargin={2.5cm,2.5cm}]{geometry}
+\usepackage[unicode, colorlinks=true,bookmarksopen=false,linkcolor=blue,citecolor=red]{hyperref}
+\usepackage{subfiles}
+\usepackage{calc}
+\usepackage{comment}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsrefs}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{dsfont}
+\usepackage{euscript}
+\usepackage{fourier-orns}
+\usepackage{pxfonts}
+\usepackage{newpxtext}
+\usepackage{tgpagella}
+\usepackage{palatino}
+\usepackage[sc]{mathpazo} % add possibly `sc` and `osf` options
+%\usepackage{eulervm}
+%\usepackage[adobe-utopia]{mathdesign}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepgfplotslibrary{polar}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{calc}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>=latex}
+}
+
+
+\linespread{1.2}
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{.4\baselineskip}
+\definecolor{blue}{rgb}{0, 0.1, 0.6}
+
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+
+\newcommand{\mylabel}[1]{{\ssf{#1}}\hfill}
+\renewenvironment{itemize}
+  {\begin{list}{$\triangleright$}{%
+   \setlength{\parskip}{0mm}
+   \setlength{\topsep}{.4\baselineskip}
+   \setlength{\rightmargin}{0mm}
+   \setlength{\listparindent}{0mm}
+   \setlength{\itemindent}{0mm}
+   \setlength{\labelwidth}{2ex}
+   \setlength{\itemsep}{.2\baselineskip}
+   \setlength{\parsep}{1ex}
+   \setlength{\partopsep}{0mm}
+   \setlength{\labelsep}{1ex}
+   \setlength{\leftmargin}{\labelwidth+\labelsep}
+   \let\makelabel\mylabel}}{%
+   \end{list}\vspace*{-1.3mm}}
+
+\renewcommand*{\emph}[1]{%
+   \smash{\tikz[baseline]\node[rectangle, fill=green!40, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{#1};}}
+
+\def\jj{\mbox{-}}
+\def\E{\exists}
+\def\A{\forall}
+\def\mdot{\mathord\cdot}
+\def\models{\vDash}
+\def\pmodels{\mathrel{\models\kern-1.5ex\raisebox{.5ex}{*}}}
+\def\notmodels{\nvDash}
+\def\proves{\vdash}
+\def\notproves{\nvdash}
+\def\proves{\vdash}
+\def\provesT{\mathrel{\mathord{\vdash}\hskip-1.13ex\raisebox{-.5ex}{\tiny$T$}}}
+\def\ZZ{\mathds Z}
+\def\NN{\mathds N}
+\def\QQ{\mathds Q}
+\def\RR{\mathds R}
+\def\BB{\mathds B}
+\def\CC{\mathds C}
+\def\PP{\mathds P}
+\def\Indicator{\mathds I}
+\def\Ar{{\rm Ar}}
+\def\dom{\mathop{\rm dom}}
+\def\range{\mathop{\rm range}}
+\def\supp{\mathop{\rm supp}}
+\def\rank{\mathop{\rm rank}}
+\def\dcl{\mathop{\rm dcl}}
+\def\acl{\mathop{\rm acl}}
+\def\rad{\mathop{\rm rad}}
+\def\eq{{{\rm eq}}}
+\def\ccl{{\rm ccl}}
+\def\Th{\textrm{Th}}
+\def\Diag{{\rm Diag}}
+\def\atpmTh{\textrm{Th}_\atpm}
+\def\Mod{\mathop{\rm Mod}}
+\def\Indicator{{\mathds 1}}
+\def\Rmod{{\mbox{\scriptsize $R$-mod}}}
+\def\Aut{{\rm Aut\kern.0ex}}
+\def\Def{{\rm Def\kern.0ex}}
+\def\Brl{{\rm Brl\kern.0ex}}
+\def\Autf{\mathord{\rm Aut\kern.15ex{f}\kern.15ex}}
+\def\orbit{\O}
+\def\oorbit{\mathpzc{o}}
+\def\oorbitf{\mathpzc{of\!}}
+\def\id{\textrm{id}}
+\def\st{{\rm st}}
+\def\tp{{\rm tp}}
+\def\atpm{{\tiny\rm at^\pm}}
+\def\qftp{\textrm{qf\mbox{-}tp}}
+\def\attp{\textrm{at\mbox{-}tp}}
+\def\atpmtp{\atpm\mbox{-}\textrm{tp}}
+\def\Deltatp{\Delta\mbox{-}\textrm{tp}}
+\def\pmDelta{\Delta\hskip-.3ex\raisebox{1ex}{\tiny$\pm$}}
+\def\pmDeltatp{\noindent\pmDelta\hskip-.3ex\textrm{-tp}}
+\def\EMtp{\textrm{{\small EM}\mbox{-}tp}}
+
+
+\def\sm{\smallsetminus}
+\def\atpmL{L_{\atpm}\hskip-.3ex}
+\def\qfL{L_{\rm qf}}
+\def\atL{L_{\tiny\rm at}\hskip-.3ex}
+\def\simdiff{\mathop\vartriangle}
+\def\IMP{\Rightarrow}
+\def\PMI{\Leftarrow}
+\def\IFF{\Leftrightarrow}
+\def\NIFF{\nLeftrightarrow}
+\def\imp{\rightarrow}
+\def\pmi{\leftarrow}
+\def\iff{\leftrightarrow}
+\def\niff{\mathrel{{\leftrightarrow}\llap{\raisebox{-.1ex}{{\small$/$}}\hskip.5ex}}}
+\def\nimp{\mathrel{{\rightarrow}\llap{\raisebox{-.1ex}{{\small$/$}}\hskip.5ex}}}
+\def\nequiv{\mathrel{\mbox{$\equiv$\llap{{\small$/$}\hskip.3ex}}}}
+\def\equivEM{\stackrel{\smash{\scalebox{.5}{\rm EM}}}{\equiv}}
+\def\equivL{\stackrel{\smash{\scalebox{.5}{\rm L}}}{\equiv}}
+\def\equivKP{\stackrel{\smash{\scalebox{.5}{\rm KP}}}{\equiv}}
+\def\equivSh{\stackrel{\smash{\scalebox{.5}{\rm Sh}}}{\equiv}}
+\def\dIFF{\IFF\hskip-2.2ex\smash{\raisebox{1.3ex}{\tiny def}}}
+\def\deq{\mathrel{=\hskip-1.9ex\smash{\raisebox{1.2ex}{\tiny def}}}}
+\def\swedge{\mathbin{\raisebox{.2ex}{\tiny$\mathbin\wedge$}}}
+\def\svee{\mathbin{\raisebox{.2ex}{\tiny$\mathbin\vee$}}}
+
+\def\bigsum{\mathop{\mbox{\large$\displaystyle\sum$}}}
+\def\bigint{\mathop{\mbox{\large$\displaystyle\int$}}}
+
+
+\def\hookdoubleheadrightarrow{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+
+\def\P{\EuScript P}
+\def\D{\EuScript D}
+\def\Aa{\EuScript A}
+\def\Ee{\EuScript E}
+\def\X{\EuScript X}
+\def\Y{\EuScript Y}
+\def\Z{\EuScript Z}
+\def\C{\EuScript C}
+\def\U{\EuScript U}
+%\def\H{\EuScript H}
+\def\I{\EuScript I}
+\def\V{\EuScript V}
+\def\R{\EuScript R}
+\def\F{\EuScript F}
+\def\G{\EuScript G}
+\def\B{\EuScript B}
+\def\M{\EuScript M}
+\def\Ll{\EuScript L}
+\def\K{\EuScript K}
+\def\O{\EuScript O}
+\def\J{\EuScript J}
+\def\S{\EuScript S}
+\def\<{\langle}
+\def\>{\rangle}
+\def\0{\varnothing}
+\def\theta{\vartheta}
+\def\phi{\varphi}
+\def\epsilon{\varepsilon}
+\def\ssf#1{\textsf{\footnotesize #1}}
+
+\titlecontents{section}
+[3.8em] % ie, 1.5em (chapter) + 2.3em
+{\vskip-1ex}
+{\contentslabel{1.5em}}
+{\hspace*{-2.3em}}
+{\titlerule*[1pc]{}\contentspage}
+
+
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\LARGE} % format
+{Chapter \ \thechapter} % label
+{0.5ex} % sep
+{} % before-code
+[] % after-code
+\titleformat{\section}[block]{\Large\bfseries}{\makebox[5ex][r]{\textbf{\thesection}}}{1.5ex}{}
+\titlespacing*{\chapter}{0em}{.5ex plus .2ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\section}{-9.7ex}{3ex plus .5ex minus .5ex}{1ex plus .2ex minus .2ex}
+
+\renewcommand*\thesection{\arabic{section}}
+
+\newtheoremstyle{mio}% name
+     {2\parskip}%      Space above
+     {\parskip}%      Space below
+     {\vl}%         Body font
+     {}%         Indent amount (empty = no indent, \parindent = para indent)
+     {\bfseries}% Thm head font
+     {}%        Punctuation after thm head
+     {1.5ex}%     Space after thm head: " " = normal interword space;
+           %   \newline = linebreak
+     {\llap{\thmnumber{\vl #2}\hskip2mm}\thmname{\vl #1}\thmnote{\kern1ex\bfseries\vl #3}}% Thm head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{liscio}% name
+     {2\parskip}%      Space above
+     {0mm}%      Space below
+     {}%         Body font
+     {}%         Indent amount (empty = no indent, \parindent = para indent)
+     {\bfseries}% Thm head font
+     {}%        Punctuation after thm head
+     {1.5ex}%     Space after thm head: " " = normal interword space;
+           %   \newline = linebreak
+     {\llap{\thmnumber{#2}\hskip2mm}\thmname{#1}\thmnote{\bfseries{} #3}}% Thm head spec (can be left empty, meaning `normal')
+
+
+
+\newcounter{thm}[chapter]
+
+% \renewcommand{\thethm}{\thechapter.\arabic{thm}}
+\renewcommand{\thethm}{\arabic{thm}}
+\theoremstyle{mio}
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{assumption}[thm]{Assumption}
+\newtheorem{void_thm}[thm]{\kern-1ex}
+\theoremstyle{liscio}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{void_def}[thm]{\kern-1ex}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{conjecture}[thm]{Conjecture}
+\newtheorem{note}[thm]{Note}
+\newtheorem{exercise}[thm]{Exercise}
+\newtheorem{example}[thm]{Example}
+\newtheorem{question}[thm]{Question}
+\setlength{\partopsep}{0mm}
+\setlength{\topsep}{0mm}
+
+\def\QED{\noindent\nolinebreak[4]\hfill\rlap{\ \ $\Box$}\medskip}
+\renewenvironment{proof}[1][Proof]%
+{\smallskip\begin{trivlist}\item[\hskip\labelsep {\bf #1}]}
+{\QED\end{trivlist}}
+
+\newenvironment{void}[1][]%
+{\begin{trivlist}\item[\hskip\labelsep {\bf #1}]}
+{\QED\end{trivlist}}
+
+
+
+\pagestyle{plain}
+
+\definecolor{violet}{RGB}{105, 5, 0}
+\definecolor{brown}{RGB}{150, 50, 10}
+\definecolor{green}{RGB}{5,100, 15}
+\def\mr{\color{brown}}
+\def\gr{\color{green}}
+\def\vl{\color{violet}}
+
+
+\def\mrA{{\mr\Aa}}
+\def\mrB{{\mr\B}}
+\def\mrC{{\mr\C}}
+\def\mrD{{\mr\D}}
+\def\grB{{\gr\B}}
+\def\grC{{\gr\C}}
+\def\grD{{\gr\D}}
+
+
+% \thickmuskip=2mu plus 0.5mu minus 0.5mu
+% \medmuskip=1mu plus 0.2mu minus 0.2mu
+\def\vc{{\footnotesize VC}}
+\def\nip{{\footnotesize NIP}}
+\def\ip{{\footnotesize IP}}
+\def\Fr{\mathop{\rm Fr}}
+\def\Var{\mathop{\rm Var}}
+\def\Ex{\mathord{\mathds E}}
+\def\Pr{\mathord{\mathds P}}
+
+
+\def\ns{{}^*\kern-.2ex}
+\def\nsS{{}^*\kern-.3ex S}
+\def\cnonfork{\mathbin{\raise1.8ex\rlap{\kern0.6ex\rule{0.6ex}{0.1ex}}\rlap{\kern1.1ex\rule{0.1ex}{1.9ex}}\raise-0.3ex\hbox{$\smile$} } }
+
+\def\simfin{\mathrel{\raise-.8ex\rlap{\kern0.9ex$\scriptscriptstyle\NN$}\sim\kern.5ex }}
+
+\def\lessfin{\mathrel{\raise-.8ex\rlap{\kern0.3ex$\scriptscriptstyle\NN$}\raise.2ex\hbox{$<$} }}
+
+\def\grtfin{\mathrel{\raise-.8ex\rlap{\kern0.6ex$\scriptscriptstyle\NN$}\raise.2ex\hbox{$>$} }}
+
+
+\def\simpoly{\mathrel{\raise-.1ex\rlap{\kern0.6ex\tiny p}\raise.2ex\hbox{$\sim$} }}
+
+\def\lesspoly{\mathrel{\raise-.3ex\rlap{\kern0.4ex\tiny p}\raise.2ex\hbox{$<$} }}
+
+\def\grtpoly{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny p}\raise.2ex\hbox{$>$} }}
+
+
+\def\simlin{\mathrel{\raise-.3ex\rlap{\kern0.6ex\tiny l}\raise.2ex\hbox{$\sim$} }}
+
+\def\lesslin{\mathrel{\raise-.5ex\rlap{\kern0.5ex\tiny l}\raise.2ex\hbox{$<$} }}
+
+\def\grtlin{\mathrel{\raise-.3ex\rlap{\kern0.7ex\tiny l}\raise.2ex\hbox{$>$} }}
+
+\def\eqPr{\mathrel{\raise-.6ex\rlap{\kern0.3ex\tiny Pr}\raise.1ex\hbox{$=$\,} }}
+
+
+\begin{document}
+\raggedbottom
+% \renewcommand{\contentsname}{Pseudofinite Yoga}
+% \tableofcontents
+
+\begin{comment}
+
+  \chapter{Pseudofinite samples}
+  
+  
+  \def\medrel#1{\parbox[t]{6ex}{\hfil$\displaystyle #1$}}
+  \def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  
+  
+  % Let $\U$, $\V$ and $\phi(x\,;z)$ be as in the notes. Question: is the following lemma true?
+  
+  % \begin{lemma}
+  %   If $\phi(x\,;z)$ has \vc-dimension $n$ then there are $b\in\V$ and $A_0\subseteq\U$ such that for every $c\in\V$ 
+    
+  %   \ceq{\hfill\phi(A_0,b)=\phi(A_0;c)}{\IMP}{\phi(\U,b)=\phi(\U;c)}
+  
+  % moreover, $A_0$ is finite and its cardinality depends only on $n$.
+  % \end{lemma}
+  
+  % Does Lemma~1 follows from Lemma~2 below? Probably not, but why not?
+  
+  % \begin{lemma}
+  %   If $\phi(x\,;z)$ has \vc-dimension $n$ then for every finite $A\subseteq\U$ there are $b\in\V$ and $A_0\subseteq A$ such that for every $c\in\V$ 
+    
+  %   \ceq{\hfill\phi(A_0,b)=\phi(A_0;c)}{\IMP}{\phi(A,b)=\phi(A;c)}
+  
+  % moreover, the cardinality of $A_0$ depends only on $n$.
+  % \end{lemma}
+  
+  
+  \def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+  \def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  
+  Fix a complete theory $T$ in the language $L$.
+  %We write $\kappa$ for the cardinality of $\U$ and assume $\kappa$ to be an inaccessible cardinal larger than $|L|$.
+  Let $M\models T$.  
+  For every positive integer $n$ define 
+  
+  \ceq{\hfill F_n}{=}{\Big\{f:M^n\to\RR\ \ :\ \ fa=0\ \textrm{for all but finitely many }a\Big\}}
+  
+  We write $\bar M$ for the multi-sorted structure $\<M,\RR,F_1, F_2,\dots\>$.
+  We need not specify right away the language of $\bar M$, for the moment we only need that the elementary map $\gamma:M\to N$ has an unique extension to an elementary map $\bar\gamma:\bar M\to\bar N$ such that
+  \begin{itemize}
+    \item[1.] $\bar\gamma\restriction M=\gamma$ 
+    \item[2.] $\bar\gamma\restriction\RR\,=\id_\RR$
+    \item[3.] $\bar\gamma(f) =f\circ\gamma$, for every $f\in F_n$.
+  \end{itemize}
+
+  The class of models $\bar M$ as above has the amalgamation property if as morphism we take the elementary maps.
+  Let $\ns\bar\U$ be a rich (i.e.\@ universal-homogeneous) mo
+
+
+
+
+
+
+  defined as follows that is and fix an elementary extension of it that is saturated and of cardinality $\kappa$.
+  This will be be denoted by $\bar\U=\<\U,\ns\RR,\F_1, \F_2,\dots\>$. 
+  Note that there is no loss of generality in assuming that $\U$ is the domain of the homesort of $\bar\U$.
+  
+  We will not be too precise about the language $\bar L$ of this expansion. 
+  We assume that $\bar L$ expands $L$ and that it is large enough to accomodate all symbols used below.
+  The only constraint is that $\vert\bar L\vert<\kappa$. 
+  This is necessary to guarantee the existence of the required saturated extension $\bar\U$.
+  
+  \def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+  \def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}
+  $\displaystyle  #3$}
+  
+  In order to present the notation, we now introduce a few symbol contained in $\bar L$.
+  For every formula in $\phi(x,z)\in\bar L$ there is a symbol in $\bar L$ for what is interpreted as a function
+  
+    \ceq{\hfill F_{|x|}\times\U^{|z|}}{\to}{\RR}
+  
+    \ceq{\hfill  (f,b)\ \ }{\mapsto}{\sum_{\phi(x,b)} fx.}
+  
+  We may write $\mu_f\phi(x,b)$ for $\sum_{\phi(x,b)} fx$, to stress that the value of this fuction is interpreted as a finitely additive measure (with values in $\ns\RR$, for the moment). 
+  
+  The \emph{norm\/} of $f\in\F_{|x|}$ is defined to be
+  
+  \ceq{\hfill \emph{$\Vert f\Vert$}}{=}{\sum_{x=x} |fx|}.
+  
+  The \emph{support} of $f\in\F_{|x|}$ is the set \emph{$\supp f$} = $\{a\in\U^{|x|}:fa\neq0\}$.
+  The (internal) cardinality of the supprt is denoted by \emph{$\vert \supp f\vert$.}
+  In general, $\vert \supp f\vert$ is a hyperfinite integer. 
+  If $a,b\in\F_{|x|}$ are $\{0,1\}$-valued we confused them with their support.
+  E.g., we write $a\subseteq b$ for $\supp a\subseteq\supp b$.
+  
+  \begin{notation}
+    Throughout the following \emph{$\Delta$\/} is a collection of definable subsets of $\U^{|x|}$ or, depending on the context, the collection of formulas defining these sets.\QED
+  \end{notation}
+  
+  \begin{lemma}
+    Let $\mu$ be finitely additive signed measures on $\Delta$, a Boolean algebra of small cardinality.
+    Then there is $f\in\F_{|x|}$ such that 
+    
+    \ceq{\hfill\mu_f\phi(x)}{=}{\mu\phi(x)}\hfill for every $\phi(x)\in\Delta$.
+       
+  \end{lemma}
+  
+  \begin{proof}
+  \def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+    Let $u$ be a variables of sort $\F_{|x|}$.
+    We claim that the type $p(u)$ defined below is finitely consistent 
+  
+    \ceq{\hfill p(u)}{=}{\Big\{\sum_{\phi(x)}ux=\mu\phi(x)\quad:\ \ \phi(x)\in\Delta\Big\}}
+  
+    Let $\{\phi_1(x),\dots,\phi_n(x)\}\subseteq\Delta$.
+    It suffices to show that there is $f\in\F_{|x|}$ such that
+    
+    \def\ceq#1#2#3{\parbox[t]{33ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  
+    \ceq{\ssf{1.}\hfill\sum_{\phi_i(x)}fx}{=}{\mu\phi_i(x)}\hfill for $i=1,\dots,n$.
+  
+    Without loss of generality we can assume that $\{\phi_1(x),\dots,\phi_n(x)\}$ is a Boolean algebra with atoms $\phi_1(x),\dots,\phi_k(x)$ for some $k\le n$.
+    Pick some $a_1,\dots,a_k\in\U^{|x|}$ such that $a_i\models\phi_i(x)$.
+    Pick $f\in\F_{|x|}$ with support $\{a_1,\dots,a_k\}$ and such that
+    
+    \ceq{\hfill f(a_i)}{=}{\mu\phi_i(x)}\hfill  for $i=1,\dots,k$.
+  
+    Clearly \ssf{1} above is satisfied by the finite additivity of the measure.
+  \end{proof}
+  
+  
+  \section{Smoothness}
+
+  Let $\Sigma\subseteq\Delta$ be Boolean algebras of subsets of $\U^{|x|}$. We say that $f\in\F_{|x|}$ is \emph{smooth\/} between $\Delta$ and $\Sigma$ if for every $\epsilon\in\RR^+$ and $\phi(x)\in\Delta$ there are $\psi_1,(x),\psi_2(x)\in\Sigma$ such that $\psi_1(x)\imp\phi(x)\imp\psi_2(x)$ and $\mu_f\big(\psi_2(x)\sm\psi_1(x)\big)<\epsilon$.
+
+  \begin{conjecture}
+    Let $\Sigma=L_x(M)$ and $\Delta=L_x(\U)$. The following are equivalent
+    \begin{itemize}
+      \item[1.] $\mu_f$ is definable over $M$ (see Definition 4.10 in \href{https://arxiv.org/abs/1811.02139}{K.Gannon}\,);
+      \item[2.] $f$ is smooth between $\Sigma$ and $\Delta$.
+    \end{itemize}
+  \end{conjecture}
+
+
+
+
+  
+\chapter{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite yoga}
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+We say that a sentence holds in \emph{almost all finite models\/} if it holds in every finite model of sufficienly large cardinality.
+
+Let $T_0$ be a given theory with arbitrarily large finite models.
+%
+We define 
+
+\ceq{\hfill\emph{$T_{\rm fin}$}}{=}{\{\phi: M\models\phi\textrm{ for almost all finite } M\models T_0\}.}
+
+A structure $N$ is a \emph{pseudofinite\/} model of $T_0$ if $N\models T_{\rm fin}$.
+%
+This is equivalent to requiring that every sentence $\phi\in\Th(N)$ holds in arbitrarily large finite models of $T_0$.
+%
+Note that every model of $T_{\rm fin}$ is infinite.
+
+We now discribe a canonical expansion of a finite model $M$ to a two sorted structure $\<M,\NN\>$.
+%
+The language of $\<M,\NN\>$ is denoted by $L'$.
+\begin{itemize}
+  \item[1.] $L'$ expands the language of $M$ and $\NN$, where $\NN$ is considered as a structure in the language with symbols for all real relations and functions of any finite arity.
+  \item[2.] $L'$ has a function $f_\phi:M^{|z|}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the first sort. 
+  %
+  The interpretation of $f_\phi(b)$ is the (finite) cardinality of $\phi(M\,;b)$.
+\end{itemize}
+
+For some application a richer language will be necessary (cfr.\@ Section~\ref{EH} below).
+%
+Other times we need to expand $M$ with a few more sorts.
+
+We define
+
+\ceq{\hfill\emph{$T'_{\rm fin}$}}{=}{\{\phi\in L': \<M,\NN\>\models\phi\textrm{ for all finite } M\models T_0\}}.
+
+% Note that, for any given $M$, the interpretation of $A_{\phi}$ is not unique.
+% Therefore the expansion $\<M,\NN\>$ is not unique.
+% %
+% We read $\<M,\NN\>\models\phi$ as claiming that every expansion as above models $\phi$.
+
+\bigskip
+In the sequel \emph{$\<\U,\ns\NN\>$\/} denotes some arbitrary saturated model of $T'_{\rm fin}$.
+
+\begin{fact}
+  Assume that $\psi\in L'$ holds in every $\<\U,\ns\NN\>$ as above.
+  %
+  Then $\<M,\NN\>\models\psi$ for all sufficienly large finite $M\models T_0$.\QED 
+\end{fact}
+
+Below we write \emph{$\ns|\phi(x\,;b)|$\/} for $f_\phi(b)$.
+%
+We call this the \emph{pseudofinite cardinality\/} of $\phi(x\,;b)$.
+%
+By the definition of  $T'_{\rm fin}$ it is clear that the pseudofinite cardinality of a definable set $\D$ does not depend on the formula defining it, so we can unambiguously write $\ns|\D|$.
+
+We will need two preorder relations (a.k.a.\@ quasiorders) on ${}^*\kern-.2ex\NN\sm\{0,1\}$. We say that the fist \emph{linear\/} the second \emph{polynomial.} Section~\ref{EH} only requires the second one. For $r,s\in {}^*\kern-.2ex\NN\sm\{0,1\}$
+\begin{itemize}
+  \item[1.]we write \emph{$r\leq_{\rm l }s$\/} if $r\le n\,s$ for some positive $n\in\NN$.
+  \item[2.]we write \emph{$r\leq_{\rm p} s$\/} if $r\le s^n$ for some positive $n\in\NN$.
+\end{itemize} 
+The associated equivalence relation are denoted by\emph{$r\simlin s$\/} and \emph{$r\simpoly s$\/ }. 
+%
+Also, we write \emph{$r\lesslin s$\/} and \emph{$r\lesspoly s$\/} for the associated strict order, i.e.\@ if $n\,r<s$, respectively $r^n< s$ for all $n\in\NN$.
+
+\begin{proposition}\label{prop_+=max}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$. 
+  %
+  For every non negative $r,s\in{}^*\kern-.2ex\NN$
+
+  \ceq{\hfill r+s}
+  {\sim}
+  {\max\{r,\,s\}}
+
+  In particular, if $\D, \C\subseteq\U^{z}$ are two definable sets, then
+
+  \ceq{\hfill {}^*\kern-.2ex\big|\D\cup\C\big|}
+  {\sim}
+  {\max\big\{{}^*\kern-.2ex|\D|,\, {}^*\kern-.2ex|\C|\big\}.}
+\end{proposition} 
+
+\begin{proof}
+  In fact 
+
+\ceq{\hfill\max\{r,s\}}
+{\le}
+{r+s}
+
+\ceq{}
+{\le}
+{2\max\{r,s\}}
+
+\ceq{}
+{\le}
+{\big(\max\{r,s\}\big)^2}
+
+
+This proves the first equivalence.
+%
+The second equivalence follows.
+\end{proof}
+
+Definable sets $\D\subseteq\U^x$ such that  $\ns|\D|\sim\ns|\U^x|$ are called \emph{large,} otherwise we say they are \emph{small.}
+%
+The context will clarify if we are referring to the linear or to the polynomial equivalence.
+
+
+\begin{corollary}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$.
+  %
+  Let $p(x)\subseteq L(\U)$ be a type such that $\phi(\U)$ is large for every $\phi(x)$ that is conjunction of formulas in $p(x)$.
+  %
+  Then $p(x)$ has an extension to a complete type with the same property.\QED
+\end{corollary}
+
+The following fact is immediate. It is stated to illustrate the typical application of the notions introduced above.
+
+\begin{fact}\label{fact_application}
+  Let $\sim$ denote either $\simlin$ or $\simpoly$.
+  %
+  Let $\phi(x\,;z)\in L$, where $x$ has finite length.
+  % 
+  Assume that in every model $\<\U,\ns\NN\>$ there is a $b\in\U^{z}$ such that $\phi(\U^x\,;b)$ is large.
+  %
+  Then there is an $n\in\NN$ such that every sufficiently large finite $M\models T_0$ contains a tuple $c$ such that
+
+  \ceq{\hfill\big|M^x\big|}{\le}{n\,\big|\phi(M^x\,;c)\big|}\hfill if $\sim$ is $\simlin$\phantom{.}\kern25ex
+  
+  \ceq{\hfill\big|M^x\big|}{\le}{\big|\psi(M^x\,;c)\big|^n}\hfill if $\sim$ is $\simpoly$.\kern25ex\rlap{$\square$}
+
+\end{fact}
+
+The following two proposition only hold for $\simpoly$.
+
+\begin{proposition}\label{prop_+=x}
+  For every non negative $r,s\in{}^*\kern-.2ex\NN$
+
+  \ceq{\hfill r\cdot s}
+  {\simpoly}
+  {\max\{r,s\}}
+\end{proposition} 
+
+\begin{proof}
+  In fact 
+
+  \ceq{\hfill\max\{r,s\}}
+  {\le}
+  {r\cdot s}
+  
+  \ceq{}
+  {\le}
+  {\big(\max\{r,s\}\big)^2}
+\end{proof}
+
+Note that, in particular, $\ns|\U|\simpoly\ns|\U^x|$ for all tuples of variables of finite arity.
+
+
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+
+\begin{corollary}\label{coroll_union_small}
+  Let $\psi(x,z)\in L'$, where $x,z$ are finite tuples of variables of the first sort.
+  %
+  Let $\Aa\subseteq\U$.
+  %
+  Assume that 
+  
+  \ceq{\hfill\ns|\Aa|}{\lesspoly}{\ns|\U|}
+  
+  \ceq{\hfill\ns|\psi(a,\U^z)|}{\lesspoly}{\ns|\U|}\quad for every $a\in\Aa$.
+  
+  Then 
+  
+  \ceq{\hfill\strut^*\!\Big|\bigcup_{a\in\Aa}\psi(a,\U^z)\Big|}{\lesspoly}{\ns|\U|}.
+\end{corollary}
+
+\begin{proof}
+  Let $r=\ns|\Aa|$.
+  %
+  Let $s=\ns|\psi(a,z)|$, where $a\in\Aa$ is choosen such that $s$ is maximal.
+  %
+  Then 
+  
+  \ceq{\hfill\strut^*\!\Big|\bigcup_{a\in\Aa}\psi(a,\U^z)\Big|}{\le}{r\cdot s}
+
+
+  \ceq{}{\lesspoly}{\ns|\U|\cdot\ns|\U|}
+
+  \ceq{}{\simpoly}{\ns|\U|.}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\section{Erd\H{o}s-Hajnal for stable graphs}\label{EH}
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+In this section we assume that the language $L'$ contains a few more symbols (below, for convenience, all finite models considered have as domain a subset of $\omega$).
+%
+\begin{itemize}
+  \item[3.]  Let $X$ be an $n$-ary relation symbol of the first sort. 
+  %
+  Let $\phi\in L\cup\{X\}$ be a sentence.
+  %
+  Then we require that $L'$ has an $n$-ary predicate $A_\phi$ in the first sort.
+  %
+  The interpretation of $A_\phi$ is a relation of maximal cardinality that makes $\phi$ true in $M$.
+  %
+  If more then one relation satisfy the requirement above, we choose the minimal one in the lexicographic order (recall that the domain of $M$ is a subset of $\omega$).
+\end{itemize}
+Let $r(\mbox{-},\mbox{-})$ be a binary relation symbol.
+%
+The theory that $T_0$ says that $r(\mbox{-},\mbox{-})$ is an irreflexive and symmetric relation (i.e.\@ a graph) and that it is $m$-stable, where $m$ is fixed but arbitrary.
+For the purpose of these notes $m$-stable means that $R_\Delta(\U)\le m$, where \emph{$R_\Delta$\/} is defined below.
+
+Let \emph{$\Delta$} $=\{r(a,x) :\, a\in\U\}$.
+%
+Let $\S\subseteq\U$.
+%
+We denote by $R_\Delta\big(\S\big)$ the Shelah binary rank of $\S$.
+%
+That is, the maximal height $n$ of binary tree of $\pmDelta$-formulas $\<\phi_i(x)\,:\, s\in {}^{<n}2\>$ such that for every $s\in {}^{n}2$ the type 
+
+\ceq{\hfill }
+{}
+{\big\{\neg^{s_i}\,\phi_{s\restriction i}(x)\, :\, i\le n\big\}}
+
+has a solution in $\S$.
+
+As $T_0$ is stable, $R_\Delta\big(\U\big)$ is finite.
+%
+Among the large $L(\U)$-definable subsets of $\U$ we fix one, say \emph{$\S=\sigma(\U)$}, such that $R_\Delta\big(\S\big)$ is minimal.
+
+\begin{fact}
+  For every $\pmDelta$-definable set $\D\subseteq\U$, exactly one between $\S\cap\D$ and $\S\cap\neg\D$ is large.
+\end{fact}
+
+\begin{proof}
+  As $\S$ is large, at least one between $\S\cap\D$ and $\S\cap\neg\D$ is large by Proposition~\ref{prop_+=max}.
+  Now, suppose for a contradiction that they both are large.
+  Let $n=R_\Delta\big(\S\big)$.
+  By the minimality of $n$, both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n$.
+  This contradicts the definition of rank.
+\end{proof}
+
+\begin{theorem}
+  There is a large set $\Aa\subseteq\U$ that is either a clique or an anticlique.
+\end{theorem}
+
+\begin{proof}
+  Let $\S=\sigma(\U)$ be as defined above.
+  %
+  Let $p(x)\subseteq\pmDelta$ be maximally consistent among the $\pmDelta$-types such that $\sigma(x)\wedge\phi(x)$ is large for every conjunction of formulas in the type.
+  %
+  By the fact above, $p(x)$ is $\pmDelta$-complete, i.e.\@ either $\phi(x)$ or $\neg\phi(x)$ is in $p(x)$ for every $\phi(x)\in\pmDelta$.
+
+  % Moreover, by compactness, $R_\Delta\big(\S\big)=R_\Delta\big(p(\U)\cap\S\big)$.
+
+  Let $\B=\{a\in\S\ :\ r(a,x)\in p\}$.
+  %
+  By stability, $\B$ is definable in $L(\U)$.
+  %
+  At least one between $\B$ and $\S\sm\B$ is large.
+  %
+  Assume the first, the argument when $\S\sm\B$ is large is similar.
+
+  Let $\Aa$ be a definable subsets of $\B$ that is maximal among those that satisfy the formula $\big(\A x,y\in\Aa\big)\,r(x,y)$.
+  %
+  The definition of $L'$ guarantees that such a set exists.
+  
+  We claim that $\Aa$ is large, hence it is the clique required by the theorem.
+  %
+  So, assume not, and reason for a contradiction.
+
+  By the maximality of $\Aa$, for every $b\in\B\sm\Aa$ there is an $a\in\Aa$ such that $\neg r(a,b)$.
+  %
+  We rephrase this as the inclusion
+
+  \ceq{\hfill\B\sm\Aa}
+  {\subseteq}
+  {\bigcup_{a\in\Aa}\neg r(a,\S)}
+
+  By assumption $\Aa$ is not large, hence $\B\sm\Aa$ is large.
+  %
+  When $a\in\Aa$, in particular $r(a,x)\in p$.
+  Therefore, by the fact above, $r(a,\S)$ is large and $\neg r(a,\S)$ is small.
+  This is a contradiction by Corollary~\ref{coroll_union_small}.
+\end{proof}
+
+Finally the Erd\H{o}s-Hajnal property is obtained applying Fact~\ref{fact_application}.
+
+\begin{corollary}
+  There is an $n$ such that in every finite model $M\models T_0$ there is a set $A\subseteq M$ of cardinality at least $|M|^{1/n}$ that is either a clique or an anticlique.\QED
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite samples}
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+We now describe an expansion of a finite model $M$ to a $3$-sorted structure $\<M,\RR^M,\RR\>$, whose language is denoted by $L'$.
+\begin{itemize}
+  \item[1.] $L'$ expands the language of $M$ and $\RR$, where $\RR$ is considered as a structure in the language with symbols for all relations and functions of any finite arity.
+  \item[2.] $L'$ expands the language of $\RR^M$, the set of function from $M$ to $\RR$, which we endow with the structure of $\RR$-algebra with the natural partial order.
+  
+  \item[3.] $L'$ contains a binary function $\RR^M\times M \to \RR$ for the evaluation of $f$, in $a$.
+  
+  \item[4.] $L'$ has a function $\Vert{\cdot}\Vert:\RR^M\to\RR$ which is interpreted as 
+  
+  \noindent\hskip-\labelwidth\hskip-\labelsep
+  \ceq{\hfill\Vert f\Vert}{=}{\sum_{a\in M} |fa|.}
+\end{itemize}
+
+Subsets of $M$ are coded into this structure via their indicator function and their cardinality is definable via the function $\Vert{\cdot}\Vert$.
+
+We will need the following easy lemma.
+
+\begin{lemma}
+  Fix $\epsilon\in\RR^+$ and $n\in\ZZ^+$.
+  Then for every $g,h\in\RR^M$ such that $|h|<n{\cdot}g$ there is a function $f\in\RR^M$ that takes at most $n/\epsilon$ distinct values and such that $\Vert h-f{\cdot} g\Vert<\epsilon{\cdot}\Vert g\Vert$.
+\end{lemma}
+
+\begin{proof}
+  The inequality $\Vert h-f{\cdot} g\Vert\le\epsilon{\cdot}\Vert g\Vert$ can be rewitten as $\Ex\big[h/g - f\big]\le\epsilon$, where $\Ex[\cdot]$ is the expectation w.r.t.\@ the probability mass function $g/\Vert g\Vert$.
+
+  Let $m>0$ be an integer which will be specified below.
+  For $i\in\ZZ$ we write $I_i$ for the real interval $[i{\cdot}n/m,\ (i+1){\cdot}n/m)$.
+  Let $Y_i= (h/g)^{-1}[I_i]$.
+  Finally define $f:M\to\RR$ by setting $fx=\Ex[h/g\, |\, Y_i]$, where $Y_i$ is is the unique set containing $x$.
+  By assumption $-n<h/g<n$, hence $f$ takes at most $2m$ values.
+
+  Note that for all random variables $X\in[a,b)$ we have  $\Ex\big[\big|X-\Ex[X]\big|\big]< (b-a)/2$.
+
+  \ceq{\hfill\Ex\Big[\big|h/g-f\big|\ \Big|\ Y_i\Big]}
+  {<}
+  {n/2m}.
+
+  As $Y_i$ is a partition of $M$ we obtain
+
+  \ceq{\hfill\Ex\Big[\big|h/g-f\big|\Big]}
+  {<}
+  {n/2m}.
+
+  Setting $m=\lceil n/2\epsilon\rceil$, we obtain the desired inequalities.  
+\end{proof}
+
+
+\begin{lemma}
+  Fix $\epsilon\in\RR^+$ and $n\in\ZZ^+$.
+  Then for every $g,h\in\RR^{M^2}$ such that $|h|<n{\cdot}g$ there is a function $f\in\RR^M$ that takes at most $n^2/\epsilon$ distinct values and such that $\Vert h-f{\cdot} g\Vert<\epsilon{\cdot}\Vert g\Vert$.
+\end{lemma}
+
+\begin{proof}
+  Similar
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Szemer\'edi's regularity Lemma}
+\def\ceq#1#2#3{\parbox[t]{40ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+A pair of subsets $V',V''\subseteq M$ is \emph{$\epsilon$-regular\/} if for every $A\subseteq V'$ and $B\subseteq V''$
+
+\ceq{\hfill\big|\Pr(r\,|\,A{\times} B) - \Pr(r\,|\,V'{\times} V'')\big|}
+{<}
+{\epsilon\, / \Pr(A{\times} B\,|\,V'{\times} V'')}
+
+where $\Pr(\cdot)$ denotes the uniform probability measure on $M^2$.
+
+\begin{void_thm}[Szemer\'edi's regularity Lemma]
+  For every $\epsilon>0$ there is $k\in \NN$ such that the following obtains. For every graph $M$ of cardinality $>k$, there is a partition $\{V_i:i<k\}$ of $M$ such that
+
+  \ceq{\hfill\sum_{\<i,j\>\in\Sigma}\Pr(V_i\times V_j)}
+  {<}
+  {\epsilon}
+
+  where $\Sigma=\{\<i,j\> : V_i, V_j \textrm{ is not } \epsilon\textrm{-regular}\}$.
+\end{void_thm}
+
+
+\section{}
+
+
+
+
+
+We write $\Delta$ for the set $\{r(x\,;b):b\in M\}$.
+We write $\Delta_{\restriction A}$ if the parameters are restricted to range over $A\subseteq M$.
+
+\begin{itemize}
+  \item[5.] Contains a function for conditional expectation $\Ex:\RR^M\times\RR^M\to\RR^M$ that has the following interpretation
+  
+  \noindent\hskip-\labelwidth\hskip-\labelsep
+  \ceq{\hfill\Ex[f\vert X]}
+  {:}
+  {M\ \ \to\ \ \RR}
+
+  \noindent\hskip-\labelwidth\hskip-\labelsep
+  \ceq{}{}
+  {\ c\ \ \ \mapsto\ \frac{1}{\Vert Y\Vert}\sum_{a\in Y}fa} 
+  
+  \smallskip
+  where $Y$ is the unique atom of $\Delta_{\restriction X}$ containing $c$.
+\end{itemize}
+
+
+
+
+
+
+Note that in $M$ a uniform comprehension principle holds.
+I.e.\@, for every $\phi(x\,;z)\in L'$, where $x$ is a variable of the home sort, $Y$ a variable of sort $\RR^M$, and $z$ is a tuple of mixed sort,
+
+\ceq{\hfill\A z\;\E Y\; \A x\ \ Yx}
+{=}
+{\left\{\begin{array}[]{llr}
+  1&\textrm{if}&\phi(x,z)\\
+  0&\textrm{if}&\neg\phi(x,z)\rlap{.}
+\end{array}\right.}
+
+
+Note that $T_0$ contains the following uniform comprehension principle.
+I.e.\@, for every $\phi(x\,;z)\in L'$, where $x$ is a variable of the home sort, $f$ a variable of sort $\RR^M$, and $z$ is a tuple of mixed sort,
+
+It follows that the caracteristic function of the set $\phi(M\,;b)$ is definable uniformly in $b$.
+To streemline notation, when suggested by the context $\phi(x\,;z)$ denotes a family of caracteristic functions parametrized by $z$.
+
+Fix a finite model $M$ and a formula $\phi(x\,;z)\in L'$, where $x$ and $z$ are both single variables.
+We write $\Delta$ for the set $\{\phi(x\,;b):b\in M\}$.
+We write $\Delta^\pm$ for the set $\Delta\cup\neg\Delta$, where $\neg\Delta$  is the set of negations of formulas in $\Delta$.
+
+We write $\wedge\Delta^\pm$ for the set containing all conjunctions of $|M|$ formulas in $\Delta^\pm$.
+This is the set containg the formulas
+
+\ceq{\hfill\psi(x\,;f)}{=}{\A z\,\big[fz\neq0\ \iff\ \phi(x\,;z)\big]} 
+
+as $f$ ranges in $\RR^M$.\le
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variance}
+
+
+
+\begin{lemma}
+  Let $B$ be a Bernoulli random variable.
+  Let $F$ be a real valued random variable such that $\vert F\vert\le a$ for some $a$.
+  Then
+
+  \ceq{\hfill \Var(F)}{\le}{\Ex\big[\Var(F\,|\,B)\big]+a^2}
+\end{lemma}
+
+\begin{proof}
+  In general, for any two random variables $F$ and $B$
+
+  \ceq{\ssf1\hfill \Var(F)}{=}{\Ex\big[\Var(F\,|\,B)\big]+\Var\big(\Ex[F\,|\,B]\big)}
+
+  Now, let $B$ be Bernoulli, and set $p=\Pr(B{=}1)$
+
+  \ceq{\hfill\Var\big(\Ex[F\,|\,B]\big)}{=}{\Big(\Ex[F\,|\,B{=}0]-\Ex[F\,|\,B{=}1]\Big)^2 p\,(1-p).}
+
+  Now, assuming $\vert F\vert\le a$ we obtain
+
+  \ceq{}{\le}{(2a)^2  p\,(1-p).}
+
+  Noting that $p\,(1-p)\le1/4$, we obtain
+
+  \ceq{}{\le}{a^2}
+
+  Hence the lemma follows from \ssf1.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{aborto}
+
+Fix a finite model $M$.
+Fix a formula $\phi(x\,;z)\in L'$.
+In the lemma below, we write $\Delta$ for the set $\{\phi(x\,;b):b\in M\}$.
+Then $\{\wedge\} \Delta^\pm$ denotes the set of conjunctions of formulas in $\Delta^\pm$. 
+When we write $\psi(x\,;c) \in \{\wedge\} \Delta^\pm$ it is understood that the parameters in $\psi(x\,;c)$ are among $c=c_1,\dots,c_n$, where $c_i\in M^z$.
+We say that $\psi(x\,;c)$ is complete if for all $i=1,\dots,n$ either $\phi(x\,;c_i)$ or its negation occurs in the conjunction.
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+\begin{lemma}\label{lem_uno}
+  For every $f \in \RR^M$ and every $\epsilon\in \RR^+$ there is a set $\Sigma\subseteq \{\wedge\} \Delta^\pm$ such that for every $b\in M^z$ exactly one of the following two inequalities holds
+  
+  \ceq{\hfill\big\Vert f \cdot \phi(x\,;b) \cdot \psi(x)\big)\Vert}{\le}{\epsilon}
+  \\[-.5ex]
+  \ssf1.
+  \\[-.5ex]
+  \ceq{\hfill\big\Vert  f \cdot \neg\phi(x\,;b) \cdot \psi(x)\big\Vert}{\le}{\epsilon.}
+\end{lemma}
+
+
+
+\begin{lemma}\label{lem_uno}
+  For every $f \in \RR^M$ and every $\epsilon\in \RR^+$ there is an $n$ and a $c\in\big(M^{z}\big)^n$ such that for every complete formula $\psi(x\,;c) \in \{\wedge\} \Delta^\pm$ and every $b\in M^z$ one of the following two inequalities holds
+  
+  \ceq{\hfill\big\Vert f \cdot \phi(x\,;b) \cdot \psi(x\,;c\big)\Vert}{\le}{\epsilon}
+  \\[-.5ex]
+  \ssf1.
+  \\[-.5ex]
+  \ceq{\hfill\big\Vert  f \cdot \neg\phi(x\,;b) \cdot \psi(x\,;c)\big\Vert}{\le}{\epsilon.}
+\end{lemma}
+
+\begin{proof}
+  Let $f$ and $\epsilon$ be given.
+  Let $\gamma$ be the maximal integer such that, for some $c$, there is set $\Gamma$ of cardinality $\gamma$ containing pairwise inconsistent formulas $\psi(x\,;c)\in\{\wedge\}\Delta^\pm$ such that $\Vert f\cdot\psi(x\,;c)\big\Vert>\epsilon$.
+
+  We claim that any $c$ as above proves the lemma.
+  Let $\psi(x\,;c)\in\{\wedge\}\Delta^\pm$ be complete and suppose for a contradiction that for some  $b\in M^z$ neither one of the two inequalities in \ssf1 is satisfied. 
+  That is
+
+  \ceq{\hfill\big\Vert f\cdot\phi(x\,;b) \cdot \psi(x\,;c)\big]\big\Vert}
+  {>}{\epsilon}
+  \\[-.5ex]
+  and
+  \\[-.5ex]
+  \ceq{\hfill\big\Vert f\cdot\neg\phi(x\,;b) \cdot \psi(x\,;c)\big]\big\Vert}
+  {>}{\epsilon.}
+
+  As in particular $\Vert f\cdot\psi(x\,;c)\Vert>\epsilon$, by the completeness of $\psi(x\,;c)$, the formulas in $
+\Gamma$ are either inconsistent with or a consequence of  $\psi(x\,;c)$. Hence by the maximality of $\Gamma$, there is some formula $\psi'(x\,;c)\in\Gamma$ such that  $\psi(x\,;c)\imp\psi'(x\,;c)$. Then the set
+
+  \hfil $\Big(\Gamma \sm \big\{\psi'(x\,;c)\big\}\Big)  \cup \Big\{ \phi(x\,;b)\wedge\psi(x\,;c),\ \  \neg\phi(x\,;b)\wedge\psi(x\,;c)\Big\}$
+  
+  contradicts the maximality of the cardinality of $\Gamma$.
+\end{proof}
+
+\begin{proposition}
+  For every $f \in \RR^M$ and $\epsilon\in \RR^+$ there is a tuple $c$ of length $\le\Vert f\Vert/\epsilon$ satisfying Lemma~\ref{lem_uno}.
+\end{proposition}
+
+\begin{proof}
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  Let $\epsilon$ be given.
+  Let $\gamma_f$ be the maximal integer such that, for some $c$, there is set $\Gamma$ of cardinality $\gamma_f$ containing pairwise inconsistent formulas $\psi(x\,;c)\in\{\wedge\}\Delta^\pm$ such that $\Vert f\cdot\psi(x\,;c)\Vert>\epsilon$.
+
+  We claim that there is a $c$ witnessing  $\gamma_f$ such that $|c|\le\gamma_f$.
+  Obviously $\gamma_f\le\Vert f\Vert/\epsilon$, hence the proposition follows from the claim.
+
+  If $\gamma_f=0$, the claim holds trivially with as $c$ the empty tuple.
+  Let $\gamma_f=k>0$ and assume the claim holds for every $f$ such that $\gamma_f<k$.
+
+  Let $f'=f\cdot\phi(x\,;b)$ and $f''=f\cdot\neg\phi(x\,;b)$, where $b$ will be specified below.
+  We check that $\gamma_{f'}+\gamma_{f''}\le\gamma_f$.
+  In fact, pick $c',\Gamma'$ and  $c'',\Gamma''$ that witness $\gamma_{f'}$ and $\gamma_{f''}$ respectively.
+  Then
+
+  \ceq{\hfill\Gamma}{=}{\Big\{\phantom{\neg}\phi(x\,;b)\wedge\,\psi'(x\,;c')\;\ :\ \psi'(x\,;c')\in\Gamma'\Big\}\ \ \cup}
+
+  \ceq{}{}{\Big\{\neg\phi(x\,;b)\wedge\psi''(x\,;c'')\ :\ \psi''(x\,;c'')\in\Gamma''\Big\}}
+
+  is a set of cardinality $\gamma_{f'}+\gamma_{f''}$ containing pairwise inconsistent formulas of the form $\psi(x\,;c)\in\{\wedge\}\Delta^\pm$, where $c=c',c'',b$, such that $\Vert f\cdot\psi(x\,;c)\Vert>\epsilon$.
+
+  The claim follows from $\gamma_{f'}+\gamma_{f''}\le\gamma_f$ and the induction hypothesis
+  if we can find a $b$ such that $\gamma_{f'}, \gamma_{f''}>0$.
+
+  Let $f$ and $c=c_1,\dots,c_n$ be such that $\Gamma$ has cardinality $\gamma_f$.
+  Suppose also that $n$ is minimal.
+  Let $d=c_1,\dots,c_{n-1}$.
+  By the minimality of $n$, there is a complete formula $\psi(x\,;d)$ such that both $\psi(x\,;d)\wedge\phi(x\,;c_n)$ and $\psi(x\,;d)\wedge\neg\phi(x\,;c_n)$ are in $\Gamma$.
+  Therefore if we set $b=c_n$, the sets 
+
+  \ceq{\hfill\Gamma'}{=}{\Big\{\psi(x\,;d)\;\ :\ \psi(x\,;d)\wedge\phi(x\,;c_n)\in\Gamma\Big\}}
+
+  \ceq{\hfill\Gamma''}{=}{\Big\{\psi(x\,;d)\;\ :\ \psi(x\,;d)\wedge\neg\phi(x\,;c_n)\in\Gamma\Big\}}
+
+  witness that $\gamma_{f'}, \gamma_{f''}>0$.
+\end{proof}
+
+
+\begin{theorem}
+  For every $f\in\RR^M$ and every $\epsilon>0$ there is a $c\in\big(M^z)^n$, where $n\le\Vert f\Vert/\epsilon$, such that for every $b\in M^z$ and every complete formula $\psi(x\,;c) \in \{\wedge\} \Delta^\pm$ one of the following occur
+
+
+  \ceq{\hfill\big\Vert f \cdot \phi(x\,;b) \cdot \psi(x\,;c\big)\Vert}{\le}{\epsilon}
+  \\[-.5ex]
+  \ssf1.
+  \\[-.5ex]
+  \ceq{\hfill\big\Vert  f \cdot \neg\phi(x\,;b) \cdot \psi(x\,;c)\big\Vert}{\le}{\epsilon.}
+\end{theorem}
+ 
+
+If $f,g\in \U$ we write $g\ll_\Delta f$ if for every $\psi(x)$ that is conjunction of formulas in $\Delta$
+
+\ceq{\hfill\sum_{\psi(x)}gx}{\lesslin}{\sum_{\psi(x)}fx}
+
+\begin{lemma}
+  If $g\ll_\Delta f$ then for every $\epsilon$ there is a simple function $h_\epsilon$ such that for every $\psi(x)$ that is conjunction of formulas in $\Delta$
+
+  \ceq{\hfill\Big|\sum_{\psi(x)}gx-\sum_{\psi(x)}h_\epsilon x\cdot fx\Big|}{<}{\epsilon.}
+
+\end{lemma}
+
+
+for every formula $\epsilon\in\RR^+$ there is a $\delta\in\RR^+$ such that 
+
+
+holds
+
+
+$\phi(x\,;b)$
+
+
+
+For every $\epsilon$ there is an function $k$ sich that
+
+$\sum_{\phi(x\,;\,b)}gx-kfx<\epsilon$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite counting measure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite counting measure}
+
+\def\ceq#1#2#3{\parbox[t]{20ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined the provious section.
+
+Let $\D\subseteq\U$ be a definable set.
+%
+We define
+
+\ceq{\hfill\Pr(\D)}
+{=}
+{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\,\ns|\D|\le m\,\ns|\U|\Big\}},
+
+where the infimum is taken in $\RR$.
+%
+It is immediate that $\Pr(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+%
+(By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
+
+We will write \emph{$\Aa\eqPr\D$} if $\Pr(\Aa\simdiff\D)=0$.
+
+\begin{lemma}\label{lem_atoms}
+  There are some $\{\wedge\}\pmDelta$-definable sets $\B_1,\dots,\B_n\subseteq\U$, where $n\le2^m$, such that for any $\{\wedge\}\pmDelta$-definable set $\Aa$, 
+  
+  \ceq{\hfill\Aa}{\eqPr}{\bigcup_{i\in I}\B_i,}
+
+  per qualche $I\subseteq n$.
+  %
+  Also, we can require that all $\B_i$ have positive measure and that they form a partition $\U$.
+\end{lemma}
+
+\begin{proof}
+  We prove a slightly more general claim.
+  %
+  Let $\D$ be a definable set of positive measure.
+  %
+  By induction on $R_\Delta(\D)=m$ we prove that there are $n\le 2^m$ many $\{\wedge\}\pmDelta$-definable sets $\B_i\subseteq\D$ such that for every $\{\wedge\}\pmDelta$-definable $\Aa\subseteq\D$ there is an $I\subseteq n$
+
+  \ceq{\hfill\Aa}{\eqPr}{\bigcup_{i\in I}\B_i.}
+
+  If  $R_\Delta(\D)=0$ then $\D$ is either disjoint of contained in every $\pmDelta$-definable set.
+  So the claim holds trivially.
+
+  Now, let $R_\Delta(\D)=m+1$.
+  By the definition of binary rank, there is a $\Delta$-definable set $\B$ such that $R_\Delta(\D\cap\B)=R_\Delta(\D\cap\neg\B)=m$.
+  Apply the induction hypothesis to $\D\cap\B$ if it has positive measure. 
+  Do the same for $\D\cap\neg\B$.
+  Note that at least one has positive measure.
+
+  It is evident that the sets $\B_i$ obtained in the construction above are disjoint and have positive measure.
+  Also, they cover $\U$ up to a set of measure $0$.
+  Hence, replacing $\B_1$ with some $\B'_1\eqPr\B_1$ we obtain an actual cover of $\U$.
+\end{proof}
+
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
+Non sono sicuro questa qui sotto sia la corretta traduzione finita.
+
+\begin{corollary}
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partition of $M$, say $B_0,\dots,B_{n-1}\subseteq M$, where $n\le2^m$ such that $|B_i|>\epsilon\,|M|$ and for every $\{\wedge\}\pmDelta$-definable set $A\subseteq M$ there is an $I\subseteq n$ such that 
+
+  \ceq{\hfill\bigg|A\simdiff\bigcup_{i\in I}B_i\bigg|}
+  {<}
+  {\epsilon\,|M|.}
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Stable Szemer\'edi's regularity}
+
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+Below, the theory $T_0$, the set of formulas $\Delta$, and the rank $m=R_\Delta$ are as defined in Section~\ref{EH}.
+
+\begin{lemma}
+  There are two partitions of $\U$, say $\B_1,\dots,\B_n$, where $n\le 2^m$, and $\C_1,\dots,\C_{2^n}$, such that for all $i,j$ either $r(\B_i,\C_j)\eqPr\0$ or $r(\B_i,\C_j)\eqPr\B_i\times\C_j$.
+\end{lemma}
+
+\begin{proof}
+  Let $\B_1,\dots,\B_n$ be the sets given by Lemma~\ref{lem_atoms}. For every $J\subseteq n$ let 
+  
+  \ceq{\hfill \C_J}{=}{\Big\{c\in\U\ :\ \ \bigcup_{i\in J}\B_i\;\eqPr r(\U,c)\Big\}}
+
+  By Lemma~\ref{lem_atoms} if $i\in J$ then $r(\B_i,\C_J)\eqPr\B_i\times\C_J$, otherwise $r(\B_i,\C_J)\eqPr\0$.
+\end{proof}
+
+For $\Aa,\B\subseteq\U$, it is usual call \emph{density\/} the conditional probability
+
+\ceq{\hfill\emph{$d(\Aa,\B)$}}
+{=}
+{\Pr\Big(r(\Aa,\B)\ \big|\ \Aa{\times}\B\Big)}
+
+\ceq{}
+{=}
+{\frac{\Pr\big(r(\Aa,\B)\big)}{\Pr(\Aa{\times}\B)}}
+
+This definition is given with the proviso that $\Aa$ and $\B$ have non zero probability.
+%
+The same notation is used for nonempty subsets $A,B\subseteq M$ of a finite model
+
+\ceq{\hfill\emph{$d(A,B)$}}
+{=}
+{\frac{\big|r(A,B)\big|}{|A\times B|}}
+
+\begin{corollary}
+  There is a partition of $\U$ into sets of positive measure $\D_1,\dots,\D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(\D_i, \D_j)=0$ or $d(\D_i, \D_j)=1$.\QED
+\end{corollary}
+
+
+Finally, the the stable Szemer\'edi regularity lemma is obtained reasoning as in Fact~\ref{fact_application}.
+
+
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
+%
+Il corollario qui sotto sembra troppo forte.
+Da quanto vedo in letteratura $n$ dovrebbe dipendere da $\epsilon$. 
+Forse non \`e la traduzione al finito giusta.
+
+\begin{corollary} 
+  For every $\epsilon>0$ there is an $k$ such that for every finite $M\models T_0$ of cardinality larger than $k$, there is a partitions of $M$, say $D_1,\dots,D_n$, where $n\le2^{2^m+1}$ such that for all $i,j$ either $d(D_i,D_j)<\epsilon$ or $d(D_i,D_j)>1-\epsilon$.
+  \QED
+\end{corollary}
+
+
+  % \ceq{\hfill\frac{|A\times B|}{|V_i\times V_j|}\cdot\bigg|\frac{|r(A,B)|}{|A\times B|} - \frac{|r(V_i,V_j)|}{|V_i\times V_j|}\bigg|}
+  % {<}
+  % {\epsilon}
+
+  % \ceq{\hfill\Pr(A,B|V_i,V_j)\cdot\big|\Pr(r|A,B) - \Pr(r|V_i,V_j)\big|}
+  % {<}
+  % {\epsilon}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\clearpage\section{Bohhh}
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+
+If $f,g\in \RR^M$ we write $g\ll_\Delta f$ if for every $\epsilon>0$ there is a $\delta>0$ such that
+
+\ceq{\hfill\sum_{x\in X}|fx|<\delta}{\IMP}{\sum_{x\in X}|gx|<\epsilon}
+
+for every $X$ in the Boolean algebra generated by $\Delta$.
+
+\begin{fact}
+  The following are equivalent
+  \begin{itemize}
+    \item[1.] $g\ll_\Delta f$
+    \item[2.] for every $X$ in the Boolean algebra generated by $\Delta$
+  \end{itemize}
+  
+\ceq{\hfill\sum_{x\in X}|fx|\sim 0}{\IMP}{\sum_{x\in X}|gx|\sim0}
+\end{fact}
+
+\begin{proof}
+  \ssf1$\IMP$\ssf2 Asume \ssf1 and $\sum_{x\in X}|fx|\sim 0$. 
+  Then $\sum_{x\in X}|gx|<\epsilon$ for every $\epsilon$ and therefore $\sum_{x\in X}|gx|\sim 0$.
+
+  \ssf2$\IMP$\ssf1 Negate \ssf1. There is an $\epsilon$ Such that for every $\delta$ there is an $X\in\Delta_n$ such that
+  
+  \ceq{\hfill\sum_{x\in X}|fx|<\delta}{\wedge}{\sum_{x\in X}|gx|\ge\epsilon}
+
+
+
+\end{proof}
+
+\begin{theorem}
+  If $g\ll_\Delta f$ then for every $\epsilon>0$ there is $\Delta$-simple function $k$ such that $\Vert g-k\,f\Vert\le\epsilon$
+\end{theorem}
+
+that is conjunction of formulas in $\Delta$
+
+\begin{lemma}
+  If $g\ll_\Delta f$ then for every $\epsilon$ there is a simple function $h_\epsilon$ such that for every $\psi(x)$ that is conjunction of formulas in $\Delta$
+
+  \ceq{\hfill\Big|\sum_{\psi(x)}gx-\sum_{\psi(x)}h_\epsilon x\cdot fx\Big|}{<}{\epsilon.}
+
+\end{lemma}
+
+
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+\clearpage\section{Bohhh}
+Let $M$ range over the finite graphs.
+
+Let $f:\NN\to\NN$ be an unbounded monotone function. 
+
+For $m\in\NN\sm\{0\}$, we write $M\models R^f< m$ if there is no map 
+
+\ceq{\hfill a\ :\ {}^{<m}2}{\to}{ M} 
+
+\ceq{\hfill   s}{\mapsto}{a_s} 
+
+such that for every $s\in {}^{m}2$ the finite type 
+
+\ceq{\hfill \big\{\neg^{s_i}\,r(x\,;a_{s\restriction i})\, :\, i<m\big\}}
+{}
+{}
+
+has more than $|M|^{1/f(|M|)}$ solutions.
+%
+We write $M\models R^f{=}\,m$ if $m$ is the minimal such that $M\models R^f{<}\, m+1$. 
+%
+If $S\subseteq M$ is a definable set, we write $M\models R^f(S)=m$ if all the solutions above are in $S$.
+
+Let $T_m$ be the theory of graphs plus axioms that $R^f\le m$.
+
+Let $k=f(\ns|\U|)$.
+%
+As $f$ is an unbounded monotone function $k>\NN$.
+
+Among the large $L(\U)$-definable subsets of $\U$ we fix one, say \emph{$\S=\sigma(\U)$}, such that $R^f\big(\S\big)$ is minimal.
+
+Let \emph{$\Delta$} $=\{r(a,x) :\, a\in\U\}$.
+
+The following fact is immediate (note the assumtion $n>0$).
+
+\begin{fact}
+  Let $\S\subseteq\U$ and suppose that for some $\pmDelta$-definable set $\D$ both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n>0$.
+  %
+  Then $R^f(\S)=n+1$.\QED
+\end{fact}
+
+\begin{fact}
+  For every $\pmDelta$-definable set $\D\subseteq\U$, exactly one between $\S\cap\D$ and $\S\cap\neg\D$ is large.
+\end{fact}
+
+\begin{proof}
+  As $\S$ is large, at least one between $\S\cap\D$ and $\S\cap\neg\D$ is large by Proposition~\ref{prop_+=max}.
+
+  Firstly, assume $R^f(\S)=0$.
+  %
+  Then for every $a\in\U$ either $S\cap r(\U,a)$ or $\S\cap\neg r(\U,a)$ has cardinality $<\ns|\U|^{1/k}$, which implies that it is small.
+  
+  Now, assume $R^f(\S)=n>0$ and suppose for a contradiction that $\S\cap\D$ and $\S\cap\neg\D$ are both large.
+  %
+  By the minimality of $n$, both $\S\cap\D$ and $\S\cap\neg\D$ have rank $n$.
+  %
+  This contradicts the fact above.
+\end{proof}
+
+\begin{corollary}
+  There is a (unique) complete $\pmDelta$-type $p(x)$ such that $\S\sm\phi(\U)$ is small for every $\phi(x)\in p$.\QED 
+\end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+\hrulefill
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+We say tha a type $p(x)\subseteq\pmDelta$ is \emph{p-isolated\/} by $\sigma(x)$ if  this is a p-large formula such that $\sigma(x)\wedge\neg\phi(x)$ is p-small for every $\phi(x)\in p$.  We may equivalently say that $\phi(x)$ is p-co-small in $\sigma(x)$. 
+
+It is convenient to fix a model where to realze global types.
+In the following $\<\V,\ns\ns\NN\>$ is a model such that $\<\U,\ns\NN\>\preceq\<\V,\ns\ns\NN\>$.
+We say that $a\in\V$ is \emph{p-isolated\/} if some formula $\sigma(x)$ such that $a\models\sigma(x)$ p-isolates $\pmDelta\mbox{-}\tp(a)$.
+
+For $a,b\in\V$, we write 
+
+\ceq{\hfill b\mathop{\cnonfork\kern-.5ex^{'}}_\U a}
+{\IFF}
+{\phi(b,a)} holds for all $\phi(x,y)\in L'(\U)$ such that $\U\subseteq\phi(\V,a)$. 
+
+ 
+This is the standard coheir-heir relation in the language $L'$.
+%
+Note that the standard numbers $\NN$ are definible in $L'$, hence they may occour in formulas of $L'(\U)$.
+
+
+
+\begin{lemma}
+  Let $a,b\in\V$ be such that $b\mathop{\cnonfork\kern-.5ex^{'}}_\U a$.
+  %
+  If $\pmDelta\mbox{-}\tp(a/\U)$ be p-isolated by $\sigma(x)$, then $\pmDelta\mbox{-}\tp(a/\U,b)$ is p-isolated by the same formula.
+\end{lemma}
+\begin{proof}
+  Suppose not. 
+  %
+  Then there is a formula in $\pmDelta$ such that $\phi(b,a)$ and $\sigma(x)\wedge\neg\phi(b,x)$ is p-large. 
+  %
+  Then $\phi(b,a)\ \wedge\ \ns|\sigma(x)\wedge\neg\phi(b,x)|\,\ge\, \ns|x=x|^{1/n}$ for some $n\in\NN$.
+
+  By the definition above $\neg\phi(c,a)\ \wedge\ \ns|\sigma(x)\wedge\neg\phi(c,x)|\,\ge\, \ns|x=x|^{1/n}$ for some $c\in\U$.
+  %
+  This contradicts the assumption that $\pmDelta\mbox{-}\tp(a/\U)$ is p-isolated.
+\end{proof}
+
+
+\begin{lemma}
+  Let $a\in\V$ be such that $\pmDelta\mbox{-}\tp(a/\U)$ be p-isolated by $\sigma(x)$.
+  %
+  There is a p-long internal sequence $c=\<c_i:i<n\>$ such that either $r(c_i,c_j)$ for all $i<j<n$ or $\neg r(c_i,c_j)$ for all  $i<j<n$.  
+\end{lemma}
+\begin{proof}
+  Let $a\equiv'_\U b$ be p-isolated by the same formula $\sigma(x)$.
+  %
+  Suppose that $b\mathop{\cnonfork\kern-.5ex^{'}}_\U a$ and that $r(b,a)$.
+  %
+  Then $r(b,x)$ is co-p-small in $\sigma(x)$.
+  %
+  As $a\equiv'_\U b$, for evey $n\in\NN$, the formula $\phi(y)=\ns|r(y,x)|_x<|x=x|^{1/n}$ is co-p-small in $\sigma(x)$. 
+
+  Let $\B_n=\{b\in\V\ :\ \sigma(b) \textrm{ and } \ns|\neg r(b,x)|<\ns|x=x|^{1/n}\}$
+\end{proof}
+%\end{comment}
+\chapter{Hyperfinite samples}
+
+\end{comment}
+
+
+
+
+% Let $\U$, $\V$ and $\phi(x\,;z)$ be as in the notes. Question: is the following lemma true?
+
+% \begin{lemma}
+%   If $\phi(x\,;z)$ has \vc-dimension $n$ then there are $b\in\V$ and $A_0\subseteq\U$ such that for every $c\in\V$ 
+  
+%   \ceq{\hfill\phi(A_0,b)=\phi(A_0;c)}{\IMP}{\phi(\U,b)=\phi(\U;c)}
+
+% moreover, $A_0$ is finite and its cardinality depends only on $n$.
+% \end{lemma}
+
+% Does Lemma~1 follows from Lemma~2 below? Probably not, but why not?
+
+% \begin{lemma}
+%   If $\phi(x\,;z)$ has \vc-dimension $n$ then for every finite $A\subseteq\U$ there are $b\in\V$ and $A_0\subseteq A$ such that for every $c\in\V$ 
+  
+%   \ceq{\hfill\phi(A_0,b)=\phi(A_0;c)}{\IMP}{\phi(A,b)=\phi(A;c)}
+
+% moreover, the cardinality of $A_0$ depends only on $n$.
+% \end{lemma}
+
+
+\def\medrel#1{\parbox[t]{6ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{23ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+\section{Hyperfinite samples}
+
+In this section we introduce hypefinite samples and prove that all Keisler measures are generated by some hypefinite sample (Lemma~\ref{lem_existence_sample}).
+
+Below \emph{$\U$\/} is a saturated model of a complete theory $T$ in the language  \emph{$L$.}
+We write  \emph{$\kappa$\/} for the cardinality of $\U$ and assume that $\kappa$ is larger thean $|L|$.
+
+For every $n\in\omega$ define 
+
+\ceq{\hfill S_n}{=}{\Big\{s:\U^n\to\RR\ \ :\ \ s\,a=0\ \textrm{for all but finitely many }a\Big\}}
+
+The elements of $S_n$ are called \emph{finite samples\/} (we will mainly use $\NN$-valued samples and interpret these as finite multisets). Let \emph{$\bar\U$\/} be the multi-sorted structure $\<\U,\RR,(S_n)_{n\in\omega}\>$.
+We call the first sort the \emph{home\/} sort; the second  is called the \emph{real\/} sort.
+The remaining sorts are called \emph{sample sorts.}
+
+The language of $\bar\U$ is denoted by \emph{$\bar L$.}
+It contains $L$ and a symbol for every subset of $\RR^n$ and every function $\RR^n\to\RR$.
+
+Moreover, for every formula in $\phi(x,z)\in L$, where $x$ is a variable of the home sort, the language $\bar L$ contains a function symbol of sort
+
+
+\ceq{\hfill S_{|x|}\times\U^{|z|}}{\to}{\RR}
+
+that we interpret as the function that maps
+
+\ceq{\ssf{1.}\hfill  (s,b)\ \ }{\mapsto}{\sum_{\phi(x,b)} s\,x.}
+
+As the functions in $S_{|x|}$ are null almost everywhere, the sum in \ssf1 is well-defined.
+We will use two informal but suggestive symbols for this function: \emph{$\sum_{\phi(x,b)} s\,x$\/} or \emph{$\mu_s\phi(x,b)$.}
+When $\phi(x,b)$ is the formula $x=b$, we write \emph{$s\, b$.}
+
+Fix an elementary extension of $\bar\U$ that is saturated and of larger cardinality.
+This elementary extension is denoted by \emph{$\ns\bar\U=\<\ns\U,\ns\RR,(\nsS_n)_{n\in\omega}\>$.}
+
+The elements of $\bigcup_{n\in\omega}\nsS_n$ are called \emph{(hyperfinite) samples.} 
+The \emph{support\/} of $s\in\nsS_{|x|}$ is the definable hyperfinite set $\{a\in\ns\U^{|x|}:s\,a\neq0\}$which we denote by \emph{$\supp s$.}
+
+If $M\preceq\U$ we write \emph{$S_n{\restriction} M$\/} for the set of functions $s\in S_n$ such that $\supp s\subseteq M^n$.
+We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{n\in\omega}\>$.
+
+\begin{fact}
+  Let $M\preceq\U$ be $\omega$-saturated.
+  Then $\bar M\preceq\bar\U$.
+  In general, when $M$ is not saturated, we have that for all sentences $\phi\in\bar L(\bar M)$ with no quantifiers of sample sort
+
+  \ceq{\hfill\bar M\models\phi}{\IFF}{\bar\U\models\phi.}
+\end{fact}
+
+\begin{proof}
+  We prove the second claim first.
+  We can assume that the function $\mu_s\phi(x,y)$ only occurs in atomic formulas of the form $\mu_s\phi(x,y)=w$. 
+
+  Fix $s\in S_n{\restriction} M$.
+  Let $a_1,\dots,a_n$ be an enumeration of $\supp s$ and define $r_i=s\,a_i$.
+  The formula $\mu_s\phi(x,y)=w$ is easily seen to be equivalent, both in $\bar M$ and in $\bar\U$, to the conjunction of the formulas
+   
+  \ceq{\hfill\bigwedge_{i=1}^n\neg^{\epsilon(i)}\phi(a_i, y)} {\imp}{\sum_{i=1}^n\epsilon(i)\cdot r_i=w}
+
+  as $\epsilon$ ranges over $^n2$.
+  Hence, every sentence $\phi\in\bar L(\bar M)$ is equivalent to some sentence in $\psi\in L(M,\RR)$.
+  As $\psi$ does not contain parameters nor quantifiers of sample sort, its truth in $\bar M$ and $\bar\U$ depends only on the structures $M,\RR$, respectvely $\U,\RR$.
+  Then the fact is a consequence of $M\preceq\U$.
+
+  Now assume that $M$ is $\omega$-saturated.
+  We need to prove that for every tuples $a,r,t$ in $\bar M$ of  home, real, respectively sample sort we have
+
+  \ceq{\hfill\bar M\models\phi(a,r,t)}{\IFF}{\bar\U\models\phi(a,r,t)}\hfill for all $\phi(x,y,w)\in\bar L$.
+  
+  Reason by induction of the syntax.
+  The only interesting case concern the existential quantifier of samle sort, say $\E u$ where $u$ has the sort of $S_{|x|}$.
+  If $\bar\U\models\E u\,\phi(u,a,r,t)$ then $\bar\U\models\phi(s,a,r,t)$ for some finite sample $s\in S_n$.
+  Let $b_1,\dots,b_n\in\U^{|x|}$ enumerate the support of $s$. 
+  Let $c_1,\dots,c_n\in M^{|x|}$ be such that $b_i\equiv_{a,\supp t}c_i$.
+  By homogeneity, there is an $f\in\Aut(\U/a,\,\supp t)$ such that $fb_i=c_i$.
+  Extend $f$ to an automorphism of $\bar\U$ by requiring that $f$ is the identity on $\RR$ and $s\,b=(f\,s)(f\,b)$.
+  Then $\bar\U\models\phi(f\,s,a,r,t)$, so $\bar M\models\phi(f\,s,a,r,t)$ follows by induction hypothesis.
+\end{proof}
+
+\begin{notation}
+  Throughout the following \emph{$\Delta$\/} is a collection of $L_x(\U)$ formulas or, depending on the context, the collection of sets defined by these.\QED
+\end{notation}
+
+\begin{lemma}\label{lem_existence_sample}
+  Let $\mu$ be finitely additive signed measures on $\Delta$, a Boolean algebra.
+  Then there is $s\in\nsS_{|x|}$ such that 
+  
+  \ceq{\hfill\mu_s\phi(x)}{=}{\mu\phi(x)}\hfill for every $\phi(x)\in\Delta$.
+     
+\end{lemma}
+
+\begin{proof}
+  Let $u$ be a variable of same sort as $\nsS_{|x|}$.
+  We claim that the type $p(u)$ defined below is finitely consistent 
+
+  \ceq{\hfill p(u)}{=}{\Big\{\sum_{\phi(x)}ux=\mu\phi(x)\quad:\ \ \phi(x)\in\Delta\Big\}}
+
+  Let $\{\phi_1(x),\dots,\phi_n(x)\}\subseteq\Delta$.
+  It suffices to show that there is $s\in\nsS_{|x|}$ such that
+  
+
+  \ceq{\ssf{1.}\hfill\sum_{\phi_i(x)}s\,x}{=}{\mu\phi_i(x)}\hfill for $i=1,\dots,n$.
+
+  Without loss of generality we can assume that $\{\phi_1(x),\dots,\phi_n(x)\}$ is a Boolean algebra with atoms $\phi_1(x),\dots,\phi_k(x)$ for some $k\le n$.
+  Pick some $a_1,\dots,a_k\in\U^{|x|}$ such that $a_i\models\phi_i(x)$.
+  Pick $s\in\nsS_{|x|}$ with support $\{a_1,\dots,a_k\}$ and such that
+  
+  \ceq{\hfill s\,a_i}{=}{\mu\phi_i(x)}\hfill  for $i=1,\dots,k$.
+
+  Clearly \ssf{1} above is satisfied by the finite additivity of the measure.
+\end{proof}
+
+
+
+\section{Pseudofinite sample}
+
+We say that a hyperfinite sample $s\in\nsS_{|x|}$ is \emph{pseudofinite\/} over $M$
+
+\ceq{\ssf1.\hfill \phi(s)}{\IMP}{\phi(\bar M)\neq\0}\hfill   for every $\phi(u)\in\bar L(\bar M)$
+
+In other words, if $\bar\tp(s/\bar\U)$ is finitely satisfied in $\bar M$. 
+We prefer not to mention finite satisfiability in this context to avoid clash with the terminology in the next section.
+Note also that the condition above is equivalent to
+
+\ceq{\ssf2.\hfill\phi(\bar M)=S_{|x|}{\restriction}M}{\IMP}{\phi(s)}\hfill   for every $\phi(u)\in\bar L(\bar M)$
+
+The following example should justify the terminology.
+
+\begin{example} 
+  We prove the following claim.
+  Let $L$ be the language of graphs.
+  Let $T$ be the theory of the random graph.
+  Fix some $M\preceq\U$ and let $s\in\nsS_1$ be a pseudofinite sample over $M$.
+  Then $\supp s$ is a pseudofinite graph.
+
+  Firstly, recall the definition of pseudofinite graph.
+  Let $T_{\rm fg}$ the set of sentences in $L$ that hold in every finite graph. A \textit{pseudofinite graph\/} is any structure that models $T_{\rm fg}$.
+
+  If $\phi\in L$ is a sentence, we denote by $\bar\phi(u)$ the formula obtained by replacing in $\phi$ the quantifiers $\E x$ and $\A x$ with their bounded form: $\E x\in\supp u$, respectively $\A x\in\supp u$.
+  Then for all $t\in\nsS_1$, we have that $\bar\phi(t)$ if and only if $\supp t\models\phi$.
+
+  To prove the claim, suppose that $\neg\bar\phi(s)$.
+  Then, by \ssf1 above, $\neg\bar\phi(t)$ holds for some $t\in S_1{\restriction}M$.
+  As $\supp t$ is a finite graph, $\phi\notin T_{\rm fg}$.\QED
+\end{example}
+
+We present a stronger version of pseudofiniteness.
+This is obtained by strengthening \ssf1 as follows. 
+Require that for every $\phi(u)\in\bar L(\bar M)$  
+
+\ceq{\ssf3.\hfill \phi(s)}{\IMP}{\phi(s\cdot \Indicator_A)} for some finite $A\subseteq M$ 
+
+where $\Indicator_M$ is the indicator of $A$.
+
+\section{Invariant samples}
+
+Here we introduce the notions of invariant and finitely satisfiable samples.
+There are two sensible variants.
+We consider the most stringent variant, which is also the easier to deal with.
+
+We write $\Aut(\ns\U/A,\{\U\})$ for the set of automorphisms of $\ns\U$ that fix $A$ pointwise and $\U$ setwise. 
+Every automorphism $f\in\Aut(\ns\U)$ has a canonical extension to an automorphism in $\Aut(\bar\U)$, which we denote by the same symbol $f$.
+Namely, this extension is the identity on $\ns\RR$ and maps $s\in\nsS_n$ to the unique $fs\in\nsS_n$ such that $(fs)\,(fa)=s\,a$.
+
+Given $s\in\nsS_{|x|}$, we say that $\mu_s$ is $A$-invariant if for every $f\in\Aut(\U/A,\{\U\})$
+
+\ceq{\hfill\mu_s}{=}{\mu_{f\,s}}
+
+Note that this is equivalent to requiring that 
+
+\ceq{\hfill\mu_s\phi(x,b)}{=}{\mu_s\phi(x,fb)}\hfill for every $\phi(x,z)\in L$ and $b\in\U^{|z|}$.
+
+
+\begin{definition}\label{def_fin_sat}
+  We say that $f$ is \emph{finitely satisfiable\/} in $M$ if for every $\phi(x)\in L(\U)$
+
+  \ceq{\hfill \phi(\supp f)\neq\0}{\IMP}{\phi(M)\neq\0.}\QED
+\end{definition}
+
+The following lemma shows that the finite satisfiability of a sample corresponds to the finite satisfiability of the associated Keisler measure.
+
+\begin{lemma}
+  Let $\mu$ be as in Lemma~\ref{lem_existence_sample} with $\Delta=L(\U)$.
+  Assume that
+
+  \ceq{\hfill \mu\phi(x)\neq0}{\IMP}{\phi(M)\neq\0}\hfill for every $\phi(x)\in\Delta$.
+  
+  Then there is $s\in\nsS_{|x|}$ that is finitely satisfied in $M$ and 
+  
+  \ceq{\hfill\mu_s\phi(x)}{=}{\mu\phi(x)}\hfill for every $\phi(x)\in\Delta$. 
+\end{lemma}
+
+\begin{proof}
+  Let $p(u)$ be as in the proof of Lemma~\ref{lem_existence_sample}.
+  Define 
+
+  \ceq{\hfill q(u)}{=}{\Big\{\A x\,[\phi(x)\imp ux=0]\ \ :\ \ \phi(x)\in\Delta,\ \phi(M)=\0\Big\}}
+
+  We need to show that $p(u)\cup q(u)$ is finitely consistent.
+  Apply the same reasoning as in the proof of Lemma~\ref{lem_existence_sample} and note that Definition~\ref{def_windependence} is automatically saisfied.
+\end{proof}
+
+\begin{fact}
+  Every sample $s\in\nsS_{|x|}$ that is finitely satisfiable in $M$ is invariant over $M$.  
+\end{fact}
+
+\begin{proof}
+  If $s$ is not $M$-invariant then for some $f\in\Aut(\ns\bar\U/M,\{\U\})$, some $\phi(x,z)\in L$ and $b\in\U^{|z|}$ 
+
+  \ceq{\hfill \mu_s\phi(x,b)}{\neq}{\mu_s\phi(x,fb)}
+  
+  In particular
+
+  \ceq{\hfill 0}{\neq}{\mu_s\Big(\phi(x,b)\niff\phi(x,fb)\Big)}
+
+  Then there is $a\in\supp s$ such that $\phi(a,b)\niff\phi(a,fb)$.
+  Hence, from the finite satisfiability of $s$, we obtain that $\phi(M,b)\neq\phi(M,fb)$.
+  This contradicts the $M$-invarance of $\mu_s$.
+\end{proof}
+
+
+
+
+\section{Smooth samples}
+
+We say that $s\in\nsS_{|x|}$ is smooth over $\Delta$, or over $A$ when $\Delta=L(A)$, if for every $\phi(x)\in L(\U)$ and every $\epsilon\in\RR^+$ there are $\psi_i(x)\in\Delta$ such that $\psi_1(x)\imp\phi(x)\imp\psi_2(x)$ and 
+
+
+\ceq{\hfill\mu_s\psi_1(x)}{\approx_\epsilon}{\mu_s\psi_2(x)}
+
+An easy argument of compactness yields this uniform version fo the condition above.
+
+\begin{fact}
+  The following are equivalent
+  \begin{itemize}
+    \item[1.] $s\in\nsS_{|x|}$ is smooth;
+    \item[2.] for every $t\in\nsS_{|x|}$, if $\mu_s\phi(x)\approx\mu_t\phi(x)$ for all $\phi(x)\in L(M)$ then the same holds for all $\phi(x)\in L(\U)$; 
+    \item[3.] for every $\phi(x,z)\in L$ and every $\epsilon\in\RR^+$ there is a  
+  \end{itemize}
+\end{fact}
+
+\begin{proof}
+  Only \ssf1$\IMP$\ssf2 requires a proof.
+  Negate \ssf2.
+\end{proof}
+
+\section{Altro}
+
+\begin{definition}\label{def_windependence}
+  We say that $s$ is \emph{weakly independent\/} of $\Delta$ over $M$ if 
+
+  \ceq{\hfill \phi(a)}{\IMP}{\phi(M)\neq\0} 
+  
+  for every $\phi(x)\in\Delta$ and  $a\in\supp s$.\QED
+\end{definition}
+
+We write 
+
+
+\section{The Radon-Nikodyn theorem}
+
+\def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
+\def\ceq#1#2#3{\parbox[t]{25ex}{$\displaystyle #1$}\medrel{#2}
+$\displaystyle  #3$}
+
+\begin{definition}
+  Let $\mu,\nu$ be finitely additive measures on $\Delta$.
+  We write \emph{$\nu\ll_\Delta\mu$\/} if for every $\epsilon\in\RR^+$ there is a $\delta\in\RR^+$ such that 
+
+  \ceq{\ssf1.\hfill|\mu|\phi(x)\le\delta}{\imp}{|\nu|\phi(x)\le\epsilon}
+  
+  holds for every $\phi(x)\in\Delta$.
+  We write \emph{$\nu\ll\mu$\/} if \ssf1 holds for all $\phi(x)\in \bar L(\bar\U)$.\QED
+\end{definition}
+
+
+
+
+
+\begin{lemma}
+  Let $\mu,\nu$ be finitely additive signed measures on $\Delta$, a Boolean algebra of small cardinality.
+  Assume also that $\mu,\nu$ are bounded,   $\nu\ll_\Delta\mu$ and $\mu\ge0$.
+  Then there are $f\in\F_{|x|}$ and, for every $\epsilon\in\RR^+$ a simple function $g_\epsilon\in\F_{|x|}$ such that 
+  
+  \ceq{\hfill\mu_f\phi(x)}{\approx}{\mu\phi(x)}
+  
+  
+  \ceq{\hfill\mu_{g_\epsilon\cdot f}\phi(x)}{\;\approx_\epsilon}{\nu\phi(x)}\hfill for every $\phi(x)\in\Delta$.
+     
+\end{lemma}
+
+\begin{proof}
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  As we can work separatey with $\nu^+$ and $\nu^-$, we can assume $\nu\ge0$.
+  Let $\delta_\epsilon$ be a function that witnesses $\nu\ll_\Delta\mu$.
+  Without loss of generality, we assume that $\delta_\epsilon\to0$ as $\epsilon\to0$.
+  
+  For every $\epsilon$ fix a maximal partition $\theta_{\epsilon,1}(x),\dots,\theta_{\epsilon,n_\epsilon}$ such that $\mu\,\theta_{\epsilon,i}(x)>\delta_\epsilon$.
+  Define, for $a\models\theta_{\epsilon,i}(x)$ 
+
+  \ceq{\hfill g_\epsilon(a)}{=}{\nu\,\theta_{\epsilon,i}(x)/\mu\,\theta_{\epsilon,i}(x)}
+  
+  Let $u$ be variable of sort $\F_{|x|}$.
+  We claim that the type $p(u)$ defined below is finitely consistent. 
+
+  \ceq{\hfill p(u)}{=}{\Big\{\sum_{\phi(x)} ux\approx_{\delta_\epsilon}\mu\phi(x)\quad:\ \ \phi(x)\in\Delta\Big\}}
+
+  \ceq{\hfill }{\cup}{\Big\{\sum_{\phi(x)}g_\epsilon x\cdot ux\approx_\epsilon\nu\phi(x)\quad:\ \ \phi(x)\in\Delta,\ \epsilon\in\RR^+ \Big\}}
+
+  Let $\{\phi_1(x),\dots,\phi_n(x)\}\subseteq\Delta$.
+  We need to show that there are $f, g\in\F_{|x|}$ such that
+  
+  \def\ceq#1#2#3{\parbox[t]{33ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+  \ceq{\ssf{1.}\hfill\sum_{\phi_i(x)}fx}{=}{\mu\phi_i(x)}\hfill for $i=1,\dots,n$;
+
+  \ceq{\ssf{2.}\hfill\sum_{\phi_i(x)}gx}{=}{\nu\phi_i(x)}\hfill for $i=1,\dots,n$;
+
+  and 
+  
+  \ceq{\ssf{3.}\hfill \A a\subseteq\supp u\,\Big[\sum_{x\in a}f x\le\delta(\epsilon)}{\imp}{\sum_{x\in a}gx\le\epsilon\Big]}\hfill for every $\epsilon\in\RR^+$.
+
+  Without loss of generality we can assume that $\{\phi_1(x),\dots,\phi_n(x)\}$ is a Boolean algebra with atoms $\phi_1(x),\dots,\phi_k(x)$.
+  Pick some $a_1,\dots,a_k\in\U^{|x|}$ such that $a_i\models\phi(x)$.
+  Pick $f, g$ with support $\{a_1,\dots,a_k\}$ and such that
+  
+  \ceq{\hfill f(a_i)}{=}{\mu\phi_i(x)}\hfill  for $i=1,\dots,k$;
+
+  \ceq{\hfill g(a_i)}{=}{\nu\phi_i(x)}\hfill  for $i=1,\dots,k$.
+
+  Clearly \ssf{1} and \ssf{2} above are satisfied by the finite additivity of the measure.
+  As for \ssf{3}, it suffices to verify that
+
+  \ceq{\hfill \sum_{j\in J}fa_i\le\delta(\epsilon)}{\imp}{\sum_{j\in J}ga_j\le\epsilon}\hfill  for every $J\subseteq\{1,\dots,k\}$.
+
+  By the definition of $f,g$ this is equivalent to
+
+  \ceq{\hfill \mu{\phi_i(x)}\le\delta(\epsilon)}{\imp}{{\nu\phi_i(x)}\le\epsilon}\hfill  for some $i=1,\dots,n$
+
+  which is holds because $\nu\ll_\Delta\mu$.
+\end{proof}
+
+
+
+
+
+
+The \emph{norm\/} of $f\in\nsS_{|x|}$ is defined as
+
+\ceq{\hfill \emph{$\Vert f\Vert$}}{=}{\sum_{x=x} |fx|}.\QED
+
+
+The (internal) cardinality of the supprt is denoted by \emph{$\vert \supp f\vert$.} 
+In general, $\vert \supp f\vert$ is a hyperfinite integer.
+If $a,b\in\nsS_{|x|}$ are $\{0,1\}$-valued we confused them with their support.
+E.g., we write $a\subseteq b$ for $\supp a\subseteq\supp b$.
+
+
+
+
+% \begin{notation}
+% \end{notation}
+
+  
+% For $a,b\in\ns\RR$, we write \emph{$a\sim b$\/} if $|a-b|$ is infinitesimal, i.e.\@ $<\epsilon$ for every $\epsilon\in\RR^+$.
+%   The following lemma is not required. 
+
+%   \begin{lemma}\label{lem_3}
+%     The following are equivalent for any $f,g\in\F_{|x|}$
+%     \begin{itemize}
+%       \item[1.] $g\ll f$
+%       \item[2.] $|f a|\sim 0 \IMP |ga|\sim 0$ for all $a\in\U^{|x|}$.
+%     \end{itemize}
+%   \end{lemma}
+  
+%   \begin{proof}
+%     Left as an exercise for the reader.
+%   \end{proof}
+  
+% \begin{fact}
+%   The following are equivalent for $f,g\in\F_{|x|}$ such that $\Vert g\Vert_\infty$ is finite.
+%   \begin{itemize}
+%     \item[1.] $g\ll f$
+%     \item[2.] for every $\epsilon\in\RR^+$ there is a $\lambda\in\RR^+$ such that $\vert gx\vert\le\max\{\lambda\vert fx\vert,\,\epsilon\}$.
+%   \end{itemize}
+% \end{fact}
+
+% \begin{proof}
+%   \ssf1$\IMP$\ssf2 Fix $\epsilon$ and let $\delta$ be as given by $g\ll f$.
+%   Let $\lambda = \Vert g\Vert_\infty / \delta$.
+%   Let $a\in\U^{|x|}$ be given.
+%   If $\vert fa\vert<\delta$ then $\vert ga\vert\le\epsilon$, hence \ssf2 holds.
+%   Otherwise $\lambda\vert fa\vert\ge\lambda\delta\ge\Vert g\Vert_\infty$, which also implies \ssf2.
+
+%   \ssf2$\IMP$\ssf1
+%   is proved similarly --it does not need $\Vert g\Vert_\infty$ to be finite.
+% \end{proof}
+
+
+
+
+% \begin{definition}
+%   We say that $f,g\in\F_{|x|}$ are \emph{$\Delta$-equivalent} if
+
+%   \ceq{\hfill \sum_{\phi(x)} gx}{=}{\sum_{\phi(x)} fx}
+  
+%   holds for every $\phi(x)\in\Delta$.\QED
+% \end{definition}
+
+
+\begin{fact}
+  Assume $\Delta$ is a Boolean algebra of small cardinality.
+  Let $f,g\in\F_{|x|}$ be such that $f\ge0$ and $\Vert g\Vert_\infty$ is finite.
+  Then for every $\epsilon\in\RR^+$ there are $h\in\F_{|x|}$ and $\lambda\in\RR^+$ such that $\vert h\vert\le \lambda\,f$ and $\Vert g - h\Vert\le\epsilon$.
+\end{fact}
+
+\begin{proof}
+  Given $\epsilon$, let $\delta$ be as given by the assumption $g\ll l$.
+  Let $n\in\NN$ be such that $|g|\le n$.
+\end{proof}
+
+
+\begin{definition}
+  For $g\in \F_{|x|}$ we say that $g$ is \emph{$\Delta$-simple\/} if it is (finite) linear combination of indicator functions of sets in $\Delta$.\QED
+\end{definition}
+   
+
+\begin{theorem}
+  Assume $\Delta$ is a Boolean algebra of small cardinality.
+  Let $f,g\in\F_{|x|}$ and assume $f\ge0$.
+  If $g\ll_\Delta f$ than for every $\epsilon\in\RR^+$ there is a $\Delta$-simple $h$ such that $\Vert g-h\cdot f\Vert\le\epsilon$.
+\end{theorem}
+
+
+% \begin{definition}
+%   Let $\phi(x,z)\in \bar L$ be fixed.
+%   We say that $f,g\in\F_{|x|}$ are \emph{equivalent} if
+
+%   \ceq{\hfill \sum_{\phi(x,b)} gx}{=}{\sum_{\phi(x,b)} fx}
+
+%   for all $b\in\U^{|z|}$.
+%   The {support} of $f\in\F_{|x|}$ is the set \emph{$\supp f$} = $\{a\in\U^{|x|}:fa\neq0\}$.
+%   We say that $f$ has \emph{minimal support} if there is no equivalent $g$ such that $\supp g\subset\supp f$.
+  
+%   We say that $f$ has bounded variation if $\sum_{x=x}|fx|<n$ for some finite (standard) $n$.\QED
+% \end{definition}
+
+
+% We say that $f$ has \emph{$\Delta$-minimal support} if it is not equivalent to any $g$ with support properly contained in $\supp f$.%
+
+% When the notion of $\Delta$-equivalence is first-order we have interesting consequences. 
+
+% \begin{lemma}
+%   Suppose $\Delta=\{\phi(x,b):b\in\U^{|z|}\}$.
+%   Then every $g$ is equivalent to some $f$ with minimal support.
+%   If $f$ has $\Delta$-minimal support, then $\phi(a,\U)\neq\phi(a',\U)$ for any two distinct $a,a'\in\supp f$.\QED
+%   % For every $\epsilon$ there is an $n$ such that for every $f$ with finite variation there is a $g$ such that $\supp g$ has carditality $\le n$ and for every $b\in\U^{|z|}$
+
+%   % \ceq{\hfill \sum_{\phi(x,b)} \vert gx- fx\vert}{<}{\epsilon}
+% \end{lemma}
+
+% \begin{proof}
+%   This is true in $\<\U,\RR,F_1, F_2,\dots\>$ and, by elementarity, in $\bar\U$.
+% \end{proof}
+
+% \begin{lemma}
+%   Suppose $\Delta=\{\phi(x,b):b\in\U^{|z|}\}$.
+%   Then following are equivalent
+%   \begin{itemize}
+%     \item[1.] $g\ll_\Delta f$\smallskip
+%     \item[2.]
+%     \noindent\hskip-\labelwidth\hskip-\labelsep
+%     \ceq{\hfill\sum_{\phi(x,b)}|fx|\sim0}{\IMP}{\sum_{\phi(x,b)}|gx|\sim0}\hfill for all $b\in\U^{|z|}$
+%     \item[3.] for every $\epsilon\in\RR^+$ there is a $\delta\in\RR^+$ such that 
+    
+%     \noindent\hskip-\labelwidth\hskip-\labelsep
+%     \ceq{\hfill\A z\ \bigg[\sum_{\phi(x,z)}|fx|<\delta}{\imp}{\sum_{\phi(x,z)}|gx|<\epsilon\bigg].}
+%   \end{itemize}
+% \end{lemma}
+
+% \begin{proof}
+%   Same proof as Lemma~\ref{lem_3}.
+% \end{proof}
+
+% \end{document}
+% \begin{lemma}
+%   If $g,f$ have bounded variation and $g\ll_\Delta f$.
+%   Then for every $\epsilon\in\RR^+$ there are $k\in\NN$ and $h\in\F_{|x|}$ such that $k\cdot f\le h\le k\cdot f$ and $\Vert g-h\Vert<\epsilon$. 
+% \end{lemma}
+
+% Let ${\sf M}_n(A)$ be the set of finitely additive signed measures on the $A$-definable subsets of $\U^n$.
+% We require that all $\mu\in{\sf M}_n(A)$ have bounded variation, i.e.\@ $\Vert\mu\Vert=|\mu|(x{=}x)$ is finite.
+
+% For $\nu,\mu\in{\sf M}_n(A)$ we write $\nu\ll\mu$ if for some function
+
+% \ceq{\hfill \delta\ :\ \big[0,\ \Vert\nu\Vert\big]}{\to}{\big[0,\ \Vert\mu\Vert\big]}\hfill (intervals of $\RR$)
+
+% \ceq{\hfill \epsilon\ \ }{\mapsto}{\delta_\epsilon,}
+
+% where $\delta_0=0$ and $\delta_{\Vert\nu\Vert}=\Vert\mu\Vert$, 
+% we have that for all $\epsilon\ge0$ and all $\phi(x)\in L(A)$
+
+% \ceq{\hfill|\mu|\,\phi(x) \le \delta_\epsilon}{\imp}{|\nu|\phi(x)\le\epsilon.}
+
+% \begin{lemma}
+%   For every $\mu\in{\sf M}_n(A)$ there is $f_\mu\in\F_{|x|}$ such that for every $\phi(x)\in L(A)$
+
+%   \ceq{\hfill \sum_{\phi(x)}f_\mu x}{=}{\mu\,\phi(x).}
+
+%   Moreover if $\nu\in{\sf M}_n(A)$ is such that $\nu\ll\mu$ then for every $\epsilon\in\RR\sm\RR^-$
+
+%   \ceq{\hfill \A x \ \Big[\,f_\mu x \le \delta_\epsilon}{\imp}{f_\nu x\le\epsilon\,\Big].}
+% \end{lemma}
+
+% \begin{lemma}
+%   For every $\mu,\nu\in{\sf M}_{|x|}(A)$, with $0\le\mu$, the following are equivalent
+%   \begin{itemize}
+%     \item[1.] $\nu\ll\mu$
+%     \item[2.] for every $\epsilon\in\RR^+$ there is an $f\in\F_{|x|}$ such that $| f_\nu-f|<\epsilon$ and $|f|\le k\cdot f_\mu$ for some $k\in\RR$;
+%     \item[3.] for every $\epsilon\in\RR^+$ there is a simple $f\in\F_{|x|}$ such that $\Vert f_\nu-f\cdot f_\mu\Vert<\epsilon$.
+%   \end{itemize}
+% \end{lemma}
+
+% \begin{proof}
+%   We may assume that $f_\nu>0$.
+%   Let $k=\Vert\nu\Vert/\delta_\epsilon$ and let $f=f_\nu\wedge k\cdot f_\mu$.
+%   Then
+
+%   \ceq{\hfill 0 }{<}{f_\nu - f\medrel{<}\epsilon}
+
+% \end{proof}
+\clearpage
+
+
+
+\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A version of Radon-Nikodym}\label{samples}
+
+\def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+\noindent\llap{\Large\color{red}\fontencoding{U}\fontfamily{futs}\selectfont\char 66\relax\ }%
+Stupidaggini
+
+In this section the canonical expansion of a finite model $M$ is a $3$-sorted structure \emph{$\<M,\NN, \NN^M\>$.}
+%
+The language of $\<M,\NN, \NN^M\>$ is denoted (again) by $L'$.
+%
+The elements of $\NN^M$ are interpreted as a multisets and are called \emph{samples.}
+%
+If $s\in\NN^M$ and $s(a)=n$, the element $a$ occurs $n$-times in the multiset. 
+\begin{itemize}
+  \item[2'.] $L'$ has a function $f_\phi:\NN^{(M^{x})}\times M^{z}\to\NN$ for each formula $\phi(x\,;z)\in L'$ and every finite tuples of variables $x\,;z$ of the home sort. 
+  %
+  The interpretation of $f_\phi(r,b)$ is
+  
+  \ceq{\hfill f_\phi(s,b)}
+  {=}
+  {\sum_{a\in\phi(M,b)}s(a)}
+
+  We will use the notation \emph{$\ns|\phi(s,b)|$\/} for $f_\phi(s,b)$ which is suggestive of is interpretation of cardinality in the multiset setting. We write \emph{$\ns|s|$\/} when $\phi(x\,;z)$ is the formula $x=x$.
+\end{itemize}
+
+We write that $r\le s$ if $r(a)\le s(a)$ for every $a\in\U^x$.
+
+Let $\D\subseteq\U^x$ be a definable set.
+%
+We denote by \emph{$\Indicator_\D$} the indicator function of $\D$.
+%
+This may be viewed as a multiset.
+
+We say that $\D$ is $s$-large if $\ns|s\cdot\Indicator_\D|\sim\ns|s|$, where $\sim$ may be either $\simlin$ or $\simpoly$ according to the context.
+%
+We write $r\ll_\Delta s$ if every $r$-large $\{\wedge\}\pmDelta$-definable set is also $s$-large.
+
+\begin{theorem}
+  For every  $r,s\in\ns\NN^{(\U^x)}$ the folowing are equivalent
+  \begin{itemize}
+    \item[1.]  $r\ll_\Delta s$
+    \item[2.]  $r'\le s$ for some $r'$ that is $\Delta$-equivalent to $r$.
+  \end{itemize}
+\end{theorem}
+
+
+Let $s\in\ns\NN^{(\U^x)}$
+
+%
+We define
+
+\ceq{\hfill{\Pr}_s(\D)}
+{=}
+{\inf\Big\{\frac{m}{n}\ :\ m,n\in\NN\sm\{0\} \text{ such that } n\cdot\ns|s\cdot\Indicator_\D|\le m\cdot\ns|s|\Big\}},
+
+where the infimum is taken in $\RR$.
+%
+It is immediate that ${\Pr}_s(\mbox{-})$ is a finite probability measure on the definable subsets of $\U$.
+%
+(By the Caratheodory Theorem it can be extended to a probability measure but this is not required here.)
+
+We say that $r,t\in\ns\NN^{(\U^{x})}$ are \emph{$\Delta$-equivalent samples\/} if  ${\Pr}_r(\D)={\Pr}_t(\D)$ for every $\{\wedge\}\pmDelta$-definable set $\D\subseteq\U^x$.
+% 
+We claim that the set of samples $\Delta$-equivalent $r$ is type definable. 
+%
+Let $x^{\rm s}$ be a variable with the sort of $\ns\NN^{(\U^{x})}$
+
+\ceq{\hfill\emph{$\Delta^{\rm\!s}$}}{=}{\Big\{m{\cdot}\ns|\psi(x^{\rm s})|\le n{\cdot}\ns|x^{\rm s}|\ :\  m,n\in\NN\ \mathrm{ and }\ \psi(x)\in\{{\wedge}\}\pmDelta\Big\}.}
+
+The samples that realize the type $p(x^{\rm s})=\Delta^{\rm\!s}\mbox{-}\tp(r)$ are those that are $\Delta$-equivalent to $r$.
+
+
+% \begin{lemma}
+%   Let $r,s\in\ns\NN^\U$ and suppose that  for every $b\in\U^z$. 
+%   %
+%   Then there is a finite definable partition of $\P_1,\dots,\P_n\subseteq\U^z$ and $n_i\in\NN$ such that  $\ns|(\phi(r\cdot\P_i\,;b)|=n_i\cdot \ns|(\phi(s\cdot\P_i\,;b)|$ for every $b\in\U^z$. 
+% \end{lemma}
+  
+\end{comment}
+
+\end{document}
