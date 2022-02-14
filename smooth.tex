@@ -1470,7 +1470,7 @@ For every $n\in\omega$ define
 
 \ceq{\hfill S_n}{=}{\Big\{s:\U^n\to\RR\ \ :\ \ s\,a=0\ \textrm{for all but finitely many }a\Big\}}
 
-The elements of $S_n$ are called \emph{finite samples\/} (we will mainly use $\NN$-valued samples and interpret these as finite multisets). Let \emph{$\bar\U$\/} be the multi-sorted structure $\<\U,\RR,(S_n)_{n\in\omega}\>$.
+The elements of $S_n$ are called \emph{standard samples\/} (we will mainly use $\NN$-valued samples and interpret these as finite multisets). Let \emph{$\bar\U$\/} be the multi-sorted structure $\<\U,\RR,(S_n)_{n\in\omega}\>$.
 We call the first sort the \emph{home\/} sort; the second  is called the \emph{real\/} sort.
 The remaining sorts are called \emph{sample sorts.}
 
@@ -1494,12 +1494,12 @@ Fix an elementary extension of $\bar\U$ that is saturated and of larger cardinal
 This elementary extension is denoted by \emph{$\ns\bar\U=\<\ns\U,\ns\RR,(\nsS_n)_{n\in\omega}\>$.}
 
 The elements of $\bigcup_{n\in\omega}\nsS_n$ are called \emph{(hyperfinite) samples.} 
-The \emph{support\/} of $s\in\nsS_{|x|}$ is the definable hyperfinite set $\{a\in\ns\U^{|x|}:s\,a\neq0\}$which we denote by \emph{$\supp s$.}
+The \emph{support\/} of $s\in\nsS_{|x|}$ is the definable hyperfinite set $\{a\in\ns\U^{|x|}:s\,a\neq0\}$ which we denote by \emph{$\supp s$.}
 
 If $M\preceq\U$ we write \emph{$S_n{\restriction} M$\/} for the set of functions $s\in S_n$ such that $\supp s\subseteq M^n$.
 We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{n\in\omega}\>$.
 
-\begin{fact}
+\begin{fact}\label{fact_elementarity}
   Let $M\preceq\U$ be $\omega$-saturated.
   Then $\bar M\preceq\bar\U$.
   In general, when $M$ is not saturated, we have that for all sentences $\phi\in\bar L(\bar M)$ with no quantifiers of sample sort
@@ -1511,7 +1511,7 @@ We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{
   We prove the second claim first.
   We can assume that the function $\mu_s\phi(x,y)$ only occurs in atomic formulas of the form $\mu_s\phi(x,y)=w$. 
 
-  Fix $s\in S_n{\restriction} M$.
+  Fix $s\in S_{|x|}{\restriction} M$.
   Let $a_1,\dots,a_n$ be an enumeration of $\supp s$ and define $r_i=s\,a_i$.
   The formula $\mu_s\phi(x,y)=w$ is easily seen to be equivalent, both in $\bar M$ and in $\bar\U$, to the conjunction of the formulas
    
@@ -1533,8 +1533,8 @@ We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{
   Let $b_1,\dots,b_n\in\U^{|x|}$ enumerate the support of $s$. 
   Let $c_1,\dots,c_n\in M^{|x|}$ be such that $b_i\equiv_{a,\supp t}c_i$.
   By homogeneity, there is an $f\in\Aut(\U/a,\,\supp t)$ such that $fb_i=c_i$.
-  Extend $f$ to an automorphism of $\bar\U$ by requiring that $f$ is the identity on $\RR$ and $s\,b=(f\,s)(f\,b)$.
-  Then $\bar\U\models\phi(f\,s,a,r,t)$, so $\bar M\models\phi(f\,s,a,r,t)$ follows by induction hypothesis.
+  Extend $f$ to an automorphism of $\bar\U$ by requiring that $f$ is the identity on $\RR$ and $f(s\,b)=(f\,s)(f\,b)$.
+  Then $\bar\U\models\phi(fs,a,r,t)$, so $\bar M\models\phi(fs,a,r,t)$ follows by induction hypothesis.
 \end{proof}
 
 \begin{notation}
@@ -1550,39 +1550,54 @@ We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{
 \end{lemma}
 
 \begin{proof}
-  Let $u$ be a variable of same sort as $\nsS_{|x|}$.
+  Let $u$ be a variable of sample sort.
   We claim that the type $p(u)$ defined below is finitely consistent 
 
-  \ceq{\hfill p(u)}{=}{\Big\{\sum_{\phi(x)}ux=\mu\phi(x)\quad:\ \ \phi(x)\in\Delta\Big\}}
+  \ceq{\hfill p(u)}{=}{\Big\{\sum_{\phi(x)}u\,x=\mu\phi(x)\quad:\ \ \phi(x)\in\Delta\Big\}}
 
   Let $\{\phi_1(x),\dots,\phi_n(x)\}\subseteq\Delta$.
-  It suffices to show that there is $s\in\nsS_{|x|}$ such that
+  It suffices to show that there is $s\in S_{|x|}$ such that
   
 
   \ceq{\ssf{1.}\hfill\sum_{\phi_i(x)}s\,x}{=}{\mu\phi_i(x)}\hfill for $i=1,\dots,n$.
 
   Without loss of generality we can assume that $\{\phi_1(x),\dots,\phi_n(x)\}$ is a Boolean algebra with atoms $\phi_1(x),\dots,\phi_k(x)$ for some $k\le n$.
   Pick some $a_1,\dots,a_k\in\U^{|x|}$ such that $a_i\models\phi_i(x)$.
-  Pick $s\in\nsS_{|x|}$ with support $\{a_1,\dots,a_k\}$ and such that
+  Pick $s\in S_{|x|}$ with support $\{a_1,\dots,a_k\}$ and such that
   
   \ceq{\hfill s\,a_i}{=}{\mu\phi_i(x)}\hfill  for $i=1,\dots,k$.
 
   Clearly \ssf{1} above is satisfied by the finite additivity of the measure.
 \end{proof}
 
+We say that $\mu_s$ is \emph{bounded\/} if there an $r\in\RR$ such that $|\mu_s|<r$.
+
+\begin{corollary}
+  Let $s\in\nsS_{|x|}$ be such that $\mu_s$ is bounded.
+  Then there is a $t\in\nsS_{|x|}$ such that $\mu_t=\st\big(\mu_s\big)$, where $\st$ denotes the standard part.\QED
+\end{corollary}
 
 
-\section{Pseudofinite sample}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pseudofinite samples}
 
 We say that a hyperfinite sample $s\in\nsS_{|x|}$ is \emph{pseudofinite\/} over $M$
 
 \ceq{\ssf1.\hfill \phi(s)}{\IMP}{\phi(\bar M)\neq\0}\hfill   for every $\phi(u)\in\bar L(\bar M)$
 
-In other words, if $\bar\tp(s/\bar\U)$ is finitely satisfied in $\bar M$. 
-We prefer not to mention finite satisfiability in this context to avoid clash with the terminology in the next section.
-Note also that the condition above is equivalent to
+or, equivalently,
 
 \ceq{\ssf2.\hfill\phi(\bar M)=S_{|x|}{\restriction}M}{\IMP}{\phi(s)}\hfill   for every $\phi(u)\in\bar L(\bar M)$
+
+In other words, $s$ is pseudofinite if $\bar\tp(s/\bar M)$ is finitely satisfied in $\bar M$ (we will not further mention finite satisfiability in this context to avoid clash with the terminology below). By Fact~\ref{fact_elementarity}, every sample is pseudofinite over any $\omega$-saturated model.
+
+If \ssf1 holds for every $\phi(u)\in\bar L(\bar\U)$ then we say that $s$ is \emph{strongly pseudofinite.}
+By the standard argument of existence of coheirs, for every $s\in\nsS_{|x|}$ pseudofinite over $M$, there is a strongly pseudofinite $t\in\nsS_{|x|}$ such that $s\equiv_{\bar M}t$.
 
 The following example should justify the terminology.
 
@@ -1604,14 +1619,36 @@ The following example should justify the terminology.
   As $\supp t$ is a finite graph, $\phi\notin T_{\rm fg}$.\QED
 \end{example}
 
-We present a stronger version of pseudofiniteness.
-This is obtained by strengthening \ssf1 as follows. 
-Require that for every $\phi(u)\in\bar L(\bar M)$  
+We use the notion above to prove the following.
 
-\ceq{\ssf3.\hfill \phi(s)}{\IMP}{\phi(s\cdot \Indicator_A)} for some finite $A\subseteq M$ 
+\begin{fact}
+  Let $s\in\nsS_{|x|}$. Then every formula $\phi(x)\in L(\U)$ such that $\phi(\U)\subseteq\supp s$ is algebraic. 
+  In particular, if $\supp s$ is definable by a formula in $L(\U)$ then it is finite.
+\end{fact}
 
-where $\Indicator_M$ is the indicator of $A$.
+\begin{proof}
+  Let $M$ be a saturated model containing all parameters of $\phi(x)$.
+  As noted above, $s$ is pseudo\-finite over $M$.
+  Therefore the formula below is satisfied in $\bar M$
+  
+  \ceq{\hfill\A x \Big[\phi(x)}{\imp} {x\in\supp u\Big]}
 
+  The fact follows immediately. 
+\end{proof}
+
+\begin{question} Let $s\in\nsS_{|x|}$ be such that for every $\phi(u)\in\bar L(\bar M)$  
+
+\ceq{\ssf3.\hfill \phi(s)}{\IMP}{\phi(s\cdot \Indicator_A)} for some finite $A\subseteq M$.
+
+Does it follows that $\supp s$ is finite?\QED
+\end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Invariant samples}
 
 Here we introduce the notions of invariant and finitely satisfiable samples.
@@ -1620,7 +1657,7 @@ We consider the most stringent variant, which is also the easier to deal with.
 
 We write $\Aut(\ns\U/A,\{\U\})$ for the set of automorphisms of $\ns\U$ that fix $A$ pointwise and $\U$ setwise. 
 Every automorphism $f\in\Aut(\ns\U)$ has a canonical extension to an automorphism in $\Aut(\bar\U)$, which we denote by the same symbol $f$.
-Namely, this extension is the identity on $\ns\RR$ and maps $s\in\nsS_n$ to the unique $fs\in\nsS_n$ such that $(fs)\,(fa)=s\,a$.
+Namely, this extension is the identity on $\ns\RR$ and maps $s\in\nsS_n$ to the unique $fs\in\nsS_n$ such that $(fs)\,(fa)=f(s\,a)$.
 
 Given $s\in\nsS_{|x|}$, we say that $\mu_s$ is $A$-invariant if for every $f\in\Aut(\U/A,\{\U\})$
 
@@ -1632,9 +1669,9 @@ Note that this is equivalent to requiring that
 
 
 \begin{definition}\label{def_fin_sat}
-  We say that $f$ is \emph{finitely satisfiable\/} in $M$ if for every $\phi(x)\in L(\U)$
+  We say that $s$ is \emph{finitely satisfiable\/} in $M$ if for every $\phi(x)\in L(\U)$
 
-  \ceq{\hfill \phi(\supp f)\neq\0}{\IMP}{\phi(M)\neq\0.}\QED
+  \ceq{\hfill \phi(\supp s)\neq\0}{\IMP}{\phi(M)\neq\0.}\QED
 \end{definition}
 
 The following lemma shows that the finite satisfiability of a sample corresponds to the finite satisfiability of the associated Keisler measure.
@@ -1679,7 +1716,7 @@ The following lemma shows that the finite satisfiability of a sample corresponds
 \end{proof}
 
 
-
+\end{document}
 
 \section{Smooth samples}
 
