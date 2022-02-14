@@ -1649,17 +1649,17 @@ Does it follows that $\supp s$ is finite?\QED
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Invariant samples}
+\section{Invariant samples I}
 
-Here we introduce the notions of invariant and finitely satisfiable samples.
+We introduce the notions of invariant and finitely satisfiable samples.
 There are two sensible variants.
-We consider the most stringent variant, which is also the easier to deal with.
+Here we consider the most stringent variant, the less stringent one is discussed in the following section.
 
 We write $\Aut(\ns\U/A,\{\U\})$ for the set of automorphisms of $\ns\U$ that fix $A$ pointwise and $\U$ setwise. 
-Every automorphism $f\in\Aut(\ns\U)$ has a canonical extension to an automorphism in $\Aut(\bar\U)$, which we denote by the same symbol $f$.
+Every automorphism $f\in\Aut(\ns\U)$ has a canonical extension to an automorphism in $\Aut(\ns\bar\U)$, which we denote by the same symbol $f$.
 Namely, this extension is the identity on $\ns\RR$ and maps $s\in\nsS_n$ to the unique $fs\in\nsS_n$ such that $(fs)\,(fa)=f(s\,a)$.
 
-Given $s\in\nsS_{|x|}$, we say that $\mu_s$ is $A$-invariant if for every $f\in\Aut(\U/A,\{\U\})$
+Given $s\in\nsS_{|x|}$, we say that $\mu_s$ is $A$-invariant if for every $f\in\Aut(\ns\U/A,\{\U\})$
 
 \ceq{\hfill\mu_s}{=}{\mu_{f\,s}}
 
@@ -1674,7 +1674,7 @@ Note that this is equivalent to requiring that
   \ceq{\hfill \phi(\supp s)\neq\0}{\IMP}{\phi(M)\neq\0.}\QED
 \end{definition}
 
-The following lemma shows that the finite satisfiability of a sample corresponds to the finite satisfiability of the associated Keisler measure.
+The following lemma shows that the finite satisfiability of a sample corresponds (in a sense) to the finite satisfiability of the associated Keisler measure.
 
 \begin{lemma}
   Let $\mu$ be as in Lemma~\ref{lem_existence_sample} with $\Delta=L(\U)$.
@@ -1694,7 +1694,7 @@ The following lemma shows that the finite satisfiability of a sample corresponds
   \ceq{\hfill q(u)}{=}{\Big\{\A x\,[\phi(x)\imp ux=0]\ \ :\ \ \phi(x)\in\Delta,\ \phi(M)=\0\Big\}}
 
   We need to show that $p(u)\cup q(u)$ is finitely consistent.
-  Apply the same reasoning as in the proof of Lemma~\ref{lem_existence_sample} and note that Definition~\ref{def_windependence} is automatically saisfied.
+  Apply the same reasoning as in the proof of Lemma~\ref{lem_existence_sample}.% and note that Definition~\ref{def_independence} is automatically saisfied.
 \end{proof}
 
 \begin{fact}
@@ -1702,7 +1702,7 @@ The following lemma shows that the finite satisfiability of a sample corresponds
 \end{fact}
 
 \begin{proof}
-  If $s$ is not $M$-invariant then for some $f\in\Aut(\ns\bar\U/M,\{\U\})$, some $\phi(x,z)\in L$ and $b\in\U^{|z|}$ 
+  If $s$ is not $M$-invariant then for some $f\in\Aut(\ns\U/M,\{\U\})$, some $\phi(x,z)\in L$ and $b\in\U^{|z|}$ 
 
   \ceq{\hfill \mu_s\phi(x,b)}{\neq}{\mu_s\phi(x,fb)}
   
@@ -1715,45 +1715,104 @@ The following lemma shows that the finite satisfiability of a sample corresponds
   This contradicts the $M$-invarance of $\mu_s$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Invariant samples II}
 
-\end{document}
+The exposition is parallel to that of the previous section with no significant differences.
 
+We write $\Aut(\ns\bar\U/A,\{\U\})$ for the set of automorphisms of $\ns\bar\U$ that fix $A$ pointwise and $\U$ setwise. 
+Given $s\in\nsS_{|x|}$, we say that $\mu_s$ is weakly $A$-invariant if for every $f\in\Aut(\ns\bar\U/A,\{\U\})$
+
+\ceq{\hfill\mu_s}{\approx}{\mu_{f\,s}}
+
+Note that this is equivalent to requiring that 
+
+\ceq{\hfill\mu_s\phi(x,b)}{\approx}{\mu_s\phi(x,fb)}\hfill for every $\phi(x,z)\in L$ and $b\in\U^{|z|}$.
+
+
+\begin{definition}\label{def_fin_sat}
+  We say that $s$ is \emph{weakly finitely satisfiable\/} in $M$ if for every $\phi(x)\in L(\U)$
+
+  \ceq{\hfill \mu_s\phi(x)\napprox 0}{\IMP}{\phi(M)\neq\0.}\QED
+\end{definition}
+
+
+
+\begin{fact}
+  Every sample $s\in\nsS_{|x|}$ that is weakly finitely satisfiable in $M$ is weakly invariant over $M$.  
+\end{fact}
+
+\begin{proof}
+  If $s$ is not weakly $M$-invariant then for some $f\in\Aut(\ns\bar\U/A,\{\U\})$, some $\phi(x,z)\in L$ and $b\in\U^{|z|}$ 
+
+  \ceq{\hfill \mu_s\phi(x,b)}{\napprox}{\mu_s\phi(x,fb)}
+  
+  In particular
+
+  \ceq{\hfill 0}{\napprox}{\mu_s\Big(\phi(x,b)\niff\phi(x,fb)\Big)}
+
+  Then, by the finite satisfiability of $s$, we obtain that $\phi(M,b)\neq\phi(M,fb)$.
+  This contradicts the $M$-invariance of $\mu_s$.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Smooth samples}
 
-We say that $s\in\nsS_{|x|}$ is smooth over $\Delta$, or over $A$ when $\Delta=L(A)$, if for every $\phi(x)\in L(\U)$ and every $\epsilon\in\RR^+$ there are $\psi_i(x)\in\Delta$ such that $\psi_1(x)\imp\phi(x)\imp\psi_2(x)$ and 
-
+We say that $s\in\nsS_{|x|}$ is \emph{smooth\/} over $A$, if for every $\phi(x,z)\in L$, every $b\in\U^{|z|}$ and every $\epsilon\in\RR^+$ there are $\psi_i(x)\in L(M)$ such that $\psi_1(x)\imp\phi(x,b)\imp\psi_2(x)$ and 
 
 \ceq{\hfill\mu_s\psi_1(x)}{\approx_\epsilon}{\mu_s\psi_2(x)}
 
-An easy argument of compactness yields this uniform version fo the condition above.
+If for a given $\phi(x,z)\in L$ and $\epsilon\in\RR^+$, finitely many pairs of formulas $\psi_i(x)$ suffices for all $b\in\U^{|z|}$, we say that $s$ is \emph{uniformly smooth.} 
+
 
 \begin{fact}
-  The following are equivalent
+  The following are equivalent for every $s\in\nsS_{|x|}$
   \begin{itemize}
-    \item[1.] $s\in\nsS_{|x|}$ is smooth;
-    \item[2.] for every $t\in\nsS_{|x|}$, if $\mu_s\phi(x)\approx\mu_t\phi(x)$ for all $\phi(x)\in L(M)$ then the same holds for all $\phi(x)\in L(\U)$; 
-    \item[3.] for every $\phi(x,z)\in L$ and every $\epsilon\in\RR^+$ there is a  
+    \item[1.] $s$ is smooth over $A$;
+    \item[2.] $s$ is uniformly smooth over $A$; 
+    \item[3.] for every $t\in\nsS_{|x|}$, if $\mu_s\phi(x)\approx\mu_t\phi(x)$ for all $\phi(x)\in L(A)$, then $\mu_s\approx\mu_t$.
   \end{itemize}
 \end{fact}
 
 \begin{proof}
-  Only \ssf1$\IMP$\ssf2 requires a proof.
-  Negate \ssf2.
+  Compactness easily proves \ssf1$\IFF$\ssf2.
+  
+  \ssf1$\IMP$\ssf3\quad Negate \ssf3. 
+  Then for $\mu_s\napprox_\epsilon\mu_t$ for some $\epsilon\in\RR^+$ and some $\phi(x)\in L(\U)$.
+  Suppose $s$ is smooth and let $\psi_i(x)$ as above but with $\epsilon/3$ for $\epsilon$.
+  Then also $\mu_t\big(\psi_2(x)\sm\psi_1(x)\big)<\epsilon/3$.
+  Therefore $\mu_t\phi(x)\approx_{\epsilon/3}\mu_t\psi_2(x)=\mu_s\psi_2(x)\approx_{\epsilon/3}\mu_s\phi(x)$.
+  A contradiction.
+
+  \ssf3$\IMP$\ssf1\quad TBC
 \end{proof}
 
-\section{Altro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
 
-\begin{definition}\label{def_windependence}
-  We say that $s$ is \emph{weakly independent\/} of $\Delta$ over $M$ if 
-
-  \ceq{\hfill \phi(a)}{\IMP}{\phi(M)\neq\0} 
-  
-  for every $\phi(x)\in\Delta$ and  $a\in\supp s$.\QED
-\end{definition}
-
-We write 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Radon-Nikodyn theorem}
 
 \def\medrel#1{\parbox[t]{5ex}{\hfil$\displaystyle #1$}}
