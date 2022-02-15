@@ -1796,7 +1796,23 @@ If for a given $\phi(x,z)\in L$ and $\epsilon\in\RR^+$, finitely many pairs of f
   Therefore $\mu_t\phi(x)\approx_{\epsilon/3}\mu_t\psi_2(x)=\mu_s\psi_2(x)\approx_{\epsilon/3}\mu_s\phi(x)$.
   A contradiction.
 
-  \ssf3$\IMP$\ssf1\quad TBC
+  \ssf3$\IMP$\ssf1\quad Compactness and the fact that $\bar\U\preceq\ns\bar\U$ ensure the existence of $s_1$ and $s_2$ such that $s_1\equiv_Ms_2\equiv_Ms$ and
+
+  \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+  
+\ceq{\hfill\big(\A a\in\supp s_1\sm\supp s\big)\,\phantom{\neg}\phi(a)}{\wedge}{\big(\A a\in\supp s\sm\supp s_1\big)\,\neg\phi(a);}
+
+\ceq{\hfill\big(\A a\in\supp s_2\sm\supp s\big)\,\neg\phi(a)}{\wedge}{\big(\A a\in\supp s\sm\supp s_2\big)\,\phantom{\neg}\phi(a).}
+
+Let
+
+\def\ceq#1#2#3{\parbox[t]{9ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
+
+\ceq{\hfill r_1}{=}{\ \,\inf\big\{r\in\RR\ :\ \mu_s\psi(x)\le r\textrm{ and }\psi(x)\imp\phi(x)\big\}}
+
+\ceq{\hfill r_2}{=}{\sup\big\{r\in\RR\ :\ \mu_s\psi(x)\ge r\textrm{ and }\phi(x)\imp\psi(x)\big\}}
+
+Then $\mu_{s_1}$ and $\mu_{s_2}$ coincide with $\mu_s$ on $L(M)$ but $\mu_{s_2}\phi(x)-\mu_{s_1}\phi(x)=r_2-r_1\ge\epsilon$.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
