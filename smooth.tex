@@ -65,7 +65,7 @@ diagrams={>=latex}
    \end{list}\vspace*{-1.3mm}}
 
 \renewcommand*{\emph}[1]{%
-   \smash{\tikz[baseline]\node[rectangle, fill=green!40, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{#1};}}
+   \smash{\tikz[baseline]\node[rectangle, fill=green!25, rounded corners, inner xsep=0.5ex, inner ysep=0.2ex, anchor=base, minimum height = 2.7ex]{#1};}}
 
 \def\jj{\mbox{-}}
 \def\E{\exists}
@@ -1470,7 +1470,7 @@ For every $n\in\omega$ define
 \ceq{\hfill\emph{$S_n$\/}}{=}{\Big\{s:\U^n\to\RR\ \ :\ \ s\,a=0\ \textrm{for all but finitely many }a\Big\}}
 
 The elements of $S_n$ are called \emph{standard samples.}
-These will interpreted as signed measures concentrated on a finite set.
+These will interpreted as \textit{signed measures concentrated on a finite set\/} (which would be more appropriate but a much too long name).
 %(We could restrict ourself to $\NN$-valued functions. 
 %This would make the term \textit{sample\/} more appropiate, but would complicate the notation.)
 We denote by \emph{$\bar\U$\/} the multi-sorted structure $\<\U,\RR,(S_n)_{n\in\omega}\>$.
@@ -1540,8 +1540,7 @@ We say that $\mu_s$ is \emph{bounded\/} if there in an $\alpha\in\RR$ such that 
 \section{Bootstrapping}\label{bootstrapping}
 
 The \emph{support\/} of $s\in\nsS_{|x|}$ is the definable (hyperfinite) set $\{a\in\ns\U^{|x|}:s\,a\neq0\}$ which we denote by \emph{$\supp s$.}
-If $M\preceq\U$ we write \emph{$S_n{\restriction} M$\/} for the set of functions $s\in S_n$ such that $\supp s\subseteq M^n$.
-We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{n\in\omega}\>$.
+If $M\preceq\U$ we define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{n\in\omega}\>$, where \emph{$S_n{\restriction} M$\/} is the set of samples $s\in S_n$ such that $\supp s\subseteq M^n$.
 
 \begin{fact}\label{fact_elementarity}
   Let $M\preceq\U$ be $\omega$-saturated.
@@ -1571,24 +1570,28 @@ We define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\restriction} M)_{
 
   \ceq{\hfill\bar M\models\phi(a,t)}{\IFF}{\bar\U\models\phi(a,t)}\hfill for all $\phi(x,w)\in\bar L$.
   
-  (There is no need to mention parameters in $\RR$ because they occur as constant in $\bar L$.) 
+  (There is no need to mention parameters in $\RR$ because they occur as constant in $\bar L$.)
   
   Reason by induction on the syntax.
   The only interesting case concern the existential quantifier of samle sort, say $\E u$ where $u$ has the sort of $S_{|x|}$.
   If $\bar\U\models\E u\,\phi(u,a,t)$ then $\bar\U\models\phi(s,a,t)$ for some finite sample $s\in S_{|x|}$.
-  Let $b_1,\dots,b_n\in\U^{|x|}$ enumerate the support of $s$. 
+  Let $b_1,\dots,b_n\in\U^{|x|}$ enumerate the support of $s$.
   By $\omega$-saturation, there are $c_1,\dots,c_n\in M^{|x|}$ such that $b_1,\dots,b_n\equiv_{a,\,\supp t}c_1,\dots,c_n$.
   By homogeneity, there is an $f\in\Aut(\U/a,\,\supp t)$ such that $fb_i=c_i$.
   Extend $f$ to an automorphism of $\bar\U$ by requiring that $f$ is the identity on $\RR$ and $f(s\,b)=(f\,s)(f\,b)$.
   Then $\bar\U\models\phi(fs,a,t)$, so $\bar M\models\phi(fs,a,t)$ follows by induction hypothesis.
 \end{proof}
 
+The following example shows that the fact above fails if we do not assume $M$ to be sufficiently saturated.
+
 \begin{example}
-  This example shows that in the fact above can fail without the assumption of saturation.
-  Let $\U=\ns\NN$ and $M=\NN$.
-  Then $\bar\U=\<\ns\NN,\RR,(S_n)_{n\in\omega}\>$ and $\bar M=\<\NN,\RR,(S_n{\restriction}\NN)_{n\in\omega}\>$. 
-  Let $x,y$ and $u$ be variables of sort $\U$ and $S_1$, respectively.
-  Then $\bar\U\notmodels \A x\; \E u\; \A y<x\; (u\,y>0)$ but this sentence holds in $\bar M$.\QED
+  Let $\U=\ns\NN$.
+  Then $\bar\U=\<\ns\NN,\RR,(S_n)_{n\in\omega}\>$.
+  Let $\bar M=\<\NN,\RR,(S_n{\restriction}\NN)_{n\in\omega}\>$. 
+  We can write a sentence $\phi$ that says that there are samples whose supports is arbitrary large. 
+  Namely, let $x,y$ de variables of the homw sort and let $u$ have sort $S_1$.
+  Then $\phi$ is the sentence  $\A x\; \E u\; \A y<x\; (u\,y\neq0)$.
+  Clearly $\bar M\models\phi$ while $\bar\U\notmodels\phi$.\QED
 \end{example}
 
 We write \emph{$\mu_s{\restriction} M=\mu_t{\restriction} M$\/} if $\mu_s\phi(x)=\mu_t\phi(x)$ for every $\phi(x)\in L(M)$.
@@ -1597,7 +1600,7 @@ The expression \emph{$\mu_s{\restriction} M\approx\mu_t{\restriction} M$\/} has 
 \begin{conjecture}[(of fundamental importance, I guess)]\label{conj_main}
    For every bounded $s,t\in\ns S_{|x|}$ the following are equivalent
   \begin{itemize}
-    \item[1.] $s\equiv_Mt$;
+    \item[1.] $s\equiv_Mt$\hfill clearly, equivalence is w.r.t.\@ the language $\bar L$;
     \item[2.] $\mu_s{\restriction} M\approx\mu_t{\restriction} M$.
   \end{itemize}
 \end{conjecture}
@@ -1613,7 +1616,7 @@ The expression \emph{$\mu_s{\restriction} M\approx\mu_t{\restriction} M$\/} has 
 \section{Smooth samples}
 
 The notion of smooth measure has been introduced by Keisler in his seminal article.
-It perfectly translates to samples.
+It translates almost literally to samples.
 % One advantage of samples is that they allow to concretize the intuition behind smoothness.
 % Smooth samples are those that are realized (in a model smaller than $\ns\bar\U$).
 
@@ -1623,9 +1626,9 @@ We say that a non-negative sample $s\in\nsS_{|x|}$ is \emph{smooth\/} over $M$, 
 
 \ceq{\hfill\mu_s\psi(x)}{\approx_\epsilon}{\mu_s\phi(x,b).}
 
-The following notion will be proven redundant in Fact~\ref{fact_smoothness} but it is introduced for emphasis.
+The following notion will be proven redundant in Fact~\ref{fact_smoothness} but we introduced it for emphasis.
 If for a given $\phi(x,z)$ and $\epsilon$, finitely many  formulas $\psi(x)$ suffices for all $b\in\U^{|z|}$, we say that $s$ is \emph{uniformly smooth.}
-Precisely, $s$ is uniformly smooth if for every $\phi(x,z)\in L$ and every $\epsilon\in\RR^+$ there are some finitely many formulas $\psi_1(x),\dots,\psi_n(x)\in L(M)$ such that for every $b\in\U^{|z|}$ there is an $i\in\{1,\dots,n\}$ such that
+Precisely, $s$ is uniformly smooth if for every $\phi(x,z)\in L$ and every $\epsilon\in\RR^+$ there are some finitely many formulas $\psi_1(x),\dots,\psi_n(x)\in L(M)$ such that for every $b\in\U^{|z|}$ there is an $i\in(n]$ such that
 
 \ceq{\hfill\psi_i(x)}{\imp}{\phi(x,b)}
 
@@ -1664,20 +1667,22 @@ The following is an important consequence of uniformity.
   The same argument applied to $\neg\phi(x)$ yields $\mu_t\phi(x)-\mu_s\phi(x)\le\epsilon$.
   This proves the claim and \ssf3 follows.
 
-  \ssf3$\IMP$\ssf1\quad Suppose $\phi(x,b)$ witness the failure of \ssf1. That is, $\mu_s\psi(x)\napprox_\epsilon\mu_s\phi(x,b)$ for some $\epsilon\in\RR^+$ and all $\psi(x)\in L(M)$.
+  \ssf3$\IMP$\ssf1\quad (Da ripulire.) Suppose $\phi(x,b)$ witness the failure of \ssf1. That is, for some $\epsilon\in\RR^+$, we have $\mu_s\psi(x)\napprox_\epsilon\mu_s\phi(x,b)$ all $\psi(x)\in L(M)$.
   Compactness and the fact that $\bar\U\preceq\ns\bar\U$ ensure the existence of $t$ of maximal (hyperfinite) cardinality such that $t\equiv_Ms$ and
 
   \def\ceq#1#2#3{\parbox[t]{35ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
   
-  \ceq{\hfill\big(\A x\in\supp t\sm\supp s\big)\neg\phi(x,b)}{\wedge}{\big(\A x\in\supp s\sm\supp t\big)\,\phi(x,b);}
+  \ceq{\hfill\big(\A x\in\supp t\sm\supp s\big)\neg\phi(x,b)}{\wedge}{\big(\A x\in\supp s\sm\supp t\big)\,\phi(x,b).}
 
   \def\ceq#1#2#3{\parbox[t]{15ex}{$\displaystyle #1$}\medrel{#2}$\displaystyle  #3$}
 
-  We claim that 
+  We claim that there is a formula  $\psi(x)\in L(M)$ such that $\mu_t\phi(x,b)-\mu_t\psi(x)<\epsilon/2$.
+  In fact, this is true in $\bar\U$ and therefore in $\ns\bar\U$.
+  From this we obtain
 
-  \ceq{\hfill\mu_t\phi(x,b)}{\approx}{\ \,\sup\big\{\mu_t\psi(x)\ :\ \psi(x)\imp\phi(x,b)\big\}.}
+  \ceq{\hfill\epsilon/2}{\le}{\mu_s\phi(x,b)-\mu_s\psi(x)+\mu_t\psi(x)-\mu_t\phi(x,b)}
 
-  This contraddicts \ssf3. 
+  which contraddicts \ssf3. 
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1688,12 +1693,12 @@ The following is an important consequence of uniformity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analytic samples}
 
-  A stronger notion of smoothness is natural in our context.
-  Apparently, it has no parallel for Keisler measures. 
-  Tentatively, we say that a sample $s\in\nsS_{|x|}$ is \emph{analytic\/} (just a hyperbole of \textit{smooth\/}) if $t\equiv_M s$ implies $t\equiv_\U s$ for every $t\in\nsS_{|x|}$.
+A stronger notion of smoothness is natural in our context.
+Apparently, it has no parallel for Keisler measures. 
+Tentatively, we say that a sample $s\in\nsS_{|x|}$ is \emph{analytic\/} (just a hyperbole of \textit{smooth\/}) if $t\equiv_M s$ implies $t\equiv_\U s$ for every $t\in\nsS_{|x|}$.
   
-  I do not know if this notion has non trivial examples. 
-  On the other hand, if Conjecture~\ref{conj_main} is true, it may be equivalent to smoothness.
+I do not know if this notion has non trivial examples. 
+On the other hand, if Conjecture~\ref{conj_main} is true, it may be equivalent to smoothness.
 
 % \begin{fact}
 %   Let $s\in\nsS_{|x|}$ be a non-negative bounded sample. 
@@ -1721,9 +1726,9 @@ The following is an important consequence of uniformity.
 
 
 In this section we define pseudofiniteness, a very strong form of  finite satisfiability. 
-There are a few distinct notions of finite satisfiabilty that apply to this context.
+There are a few distinct notions of finite satisfiabilty that apply to our context.
 Pseudo\-finiteness it is the notion that best fit with that of analytic samples.
-(A weaker notion of finite satisfiability that corresponds to that of Keisler measures will be introduced later.)
+(A weaker notion of finite satisfiability that almost literally translate that of Keisler measures will be introduced later.)
 
 We say that a sample $s\in\nsS_{|x|}$ is \emph{elementary\/} over $M$ if
 
@@ -1791,7 +1796,7 @@ To illustrate the notion of pseudofiniteness we prove the following simple fact.
 % \end{fact}
 
 \begin{question} For what theories does the following hold?
-  For every pseudofinite $s\in\nsS_{|x|}$ there is an $s'\equiv_Ms$ such that for every $\phi(u)\in\bar L(\U)$
+  For every pseudofinite sample $s\in\nsS_{|x|}$ there is an $s'\equiv_Ms$ such that for every $\phi(u)\in\bar L(\U)$
 
 \ceq{\ssf2.\hfill \phi(s')}{\IMP}{\textrm{there is a finite }A\subseteq M\textrm{ such that }\phi(s'\cdot \Indicator_A).}
 
