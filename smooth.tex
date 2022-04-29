@@ -1553,6 +1553,7 @@ If $M\preceq\U$ we define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\r
 \begin{proof}
   We prove the second claim first.
   We can assume that the function $\mu_s\phi(x,z)$ only occurs in atomic formulas of the form $\mu_s\phi(x,z)=y$.
+  Rewriting formulas in this only introduces new quantifiers over the reals.
 
   Fix $s\in S_{|x|}{\restriction} M$.
   Let $a_1,\dots,a_n$ be an enumeration of $\supp s$ and define $\alpha_i=s\,a_i$.
@@ -1573,7 +1574,7 @@ If $M\preceq\U$ we define \emph{$\bar M$\/} to be the structure $\<M,\RR,(S_n{\r
   (There is no need to mention parameters in $\RR$ because they occur as constant in $\bar L$.)
   
   Reason by induction on the syntax.
-  The only interesting case concern the existential quantifier of samle sort, say $\E u$ where $u$ has the sort of $S_{|x|}$.
+  The only interesting case concern the existential quantifiers of samle sort, say $\E u$ where $u$ has the sort of $S_{|x|}$.
   If $\bar\U\models\E u\,\phi(u,a,t)$ then $\bar\U\models\phi(s,a,t)$ for some finite sample $s\in S_{|x|}$.
   Let $b_1,\dots,b_n\in\U^{|x|}$ enumerate the support of $s$.
   By $\omega$-saturation, there are $c_1,\dots,c_n\in M^{|x|}$ such that $b_1,\dots,b_n\equiv_{a,\,\supp t}c_1,\dots,c_n$.
@@ -1589,7 +1590,7 @@ The following example shows that the fact above fails if we do not assume $M$ to
   Then $\bar\U=\<\ns\NN,\RR,(S_n)_{n\in\omega}\>$.
   Let $\bar M=\<\NN,\RR,(S_n{\restriction}\NN)_{n\in\omega}\>$. 
   We can write a sentence $\phi$ that says that there are samples whose supports is arbitrary large. 
-  Namely, let $x,y$ de variables of the homw sort and let $u$ have sort $S_1$.
+  Namely, let $x,y$ de variables of the home sort and let $u$ have sort $S_1$.
   Then $\phi$ is the sentence  $\A x\; \E u\; \A y<x\; (u\,y\neq0)$.
   Clearly $\bar M\models\phi$ while $\bar\U\notmodels\phi$.\QED
 \end{example}
@@ -1605,7 +1606,16 @@ The expression \emph{$\mu_s{\restriction} M\approx\mu_t{\restriction} M$\/} has 
   \end{itemize}
 \end{conjecture}
 
+Write $\bar L^{\!\cdot}$ for the smallsest set of formulas containing $L$, $\bar L_{\rm qf}$ and closed under quantification in the sort of the reals.
+Write $\dot\equiv_M$ for elementary equivalence restricted to formulas in $\bar L^{\!\cdot}$.
 
+\begin{conjecture}[(weaker but true, I guess)]\label{conj_main}
+  For every bounded $s,t\in\ns S_{|x|}$ the following are equivalent
+ \begin{itemize}
+   \item[1.] $s\mathrel{\dot\equiv}_Mt$
+   \item[2.] $\mu_s{\restriction} M\approx\mu_t{\restriction} M$.
+ \end{itemize}
+\end{conjecture}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
